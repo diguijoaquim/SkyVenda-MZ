@@ -1,0 +1,32 @@
+{
+  "sellers": [
+    {
+      "id": 1,
+      "name": "Ghost04",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+      "followers": 5420,
+      "verified": true
+    },
+    {
+      "id": 2,
+      "name": "Sintia",
+      "avatar": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e",
+      "followers": 3250,
+      "verified": true
+    },
+    {
+      "id": 3,
+      "name": "Dina",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      "followers": 2890,
+      "verified": false
+    },
+    {
+      "id": 4,
+      "name": "Digital World",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7",
+      "followers": 4150,
+      "verified": true
+    }
+  ]
+}
