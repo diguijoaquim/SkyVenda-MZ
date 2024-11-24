@@ -1,23 +1,27 @@
-import { AuthContext } from "../../context/AuthContext"; // the context of autentication
-import { HomeContext } from "../../context/HomeContext"; // the context of the app
-import { useContext,useState } from "react";
+import { useContext } from "react";
 import React from "react";
+import { AuthContext } from "../../context/AuthContext"; // Contexto de autenticação
 
 export default function Perfil() {
-    //usando o authContext podemos saber se o usuario esta logado ou nao 
-    //tambem o mesmo tem funcoes de login,logout e mais
-    //vamos recuperar o os estados do auth aqui
-    const {user,isAuthenticated,logout}=useContext(AuthContext)
+    // Recupera os estados e funções do AuthContext
+    const { user, isAuthenticated, logout } = useContext(AuthContext);
 
- return (
+    // Caso o `user` não esteja definido, exibe uma mensagem de carregamento
+    if (!user) {
+        return (
+            <div className="p-40">
+                <h1>Carregando dados do usuário...</h1>
+            </div>
+        );
+    }
+
+    return (
         <div className="p-40">
-            <h1>User Data</h1>
+            <h1>Dados do Usuário</h1>
             <pre>{JSON.stringify(user, null, 2)}</pre>
-            {user && user.revisado !== undefined ? (
-                <p>Revisado: {user.revisado ? true : false}</p>
-            ) : (
-                <p>Dados do usuário não disponíveis</p>
-            )}
+            <p>
+                Revisado: {user.revisado ? "Sim" : "Não"}
+            </p>
         </div>
- );
-} 
+    );
+}
