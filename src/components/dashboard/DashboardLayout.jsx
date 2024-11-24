@@ -88,11 +88,18 @@ function DashboardLayout({ children }) {
 
         {/* Alert */}
         {!user?.revisado && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-24 mx-4 " role="alert">
+          <div 
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-24 mx-4" 
+            role="alert"
+          >
             <strong className="font-bold">Atenção!</strong>
-            <span className="block sm:inline"> Sua conta ainda não foi verificada.  <a href='/perfil' className='underlined'>enviar para a revisao</a></span>
+            <p className="block sm:inline">
+              Sua conta ainda não foi verificada. 
+              <a href="/perfil" className="underline text-blue-600 hover:text-blue-800">Enviar para revisão</a>
+            </p>
           </div>
         )}
+
 
         {/* Main Content Area */}
         <main className="pt-16 px-4 min-h-screen">
