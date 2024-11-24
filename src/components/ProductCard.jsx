@@ -72,7 +72,7 @@ function ProductCard({ product }) {
       {/* Product Image */}
       <div className="relative h-[200px] overflow-hidden">
         <img
-            src={`https://skyvendamz.onrender.com/produto/${product.capa}`} 
+            src={`https://skyvendamz.up.railway.app/produto/${product.capa}`} 
             alt={product.name}
             className="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-110"
           />

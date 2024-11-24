@@ -64,7 +64,7 @@ function ProductPage() {
         <div className="md:w-1/2">
           {product.capa ? (
             <img
-              src={`https://skyvendamz.onrender.com/produto/${product.capa}`}
+              src={`https://skyvendamz.up.railway.app/produto/${product.capa}`}
               alt={product.nome}
               className="w-full h-auto rounded-lg shadow-lg"
             />
