@@ -108,7 +108,13 @@ function DashboardLayout({ children }) {
 
         {/* FAB */}
         <button 
-          onClick={() => setIsPublishOpen(true)}
+          onClick={() => {
+            if(user?.revisado){
+              setIsPublishOpen(true)
+            }else{
+              alert("A sua conta nao foi revisada")
+            }
+          }}
           className="fixed right-8 bottom-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110 hover:rotate-180 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           <FiPlus size={24} />
