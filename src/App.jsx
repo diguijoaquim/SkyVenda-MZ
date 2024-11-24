@@ -51,9 +51,9 @@ function App() {
                     <Header />
                     <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/perfil" element={<HomePage />} /> {/* Rotas específicas primeiro */}
+                    <Route path="perfil" element={<Perfil />} /> {/* Rotas específicas primeiro */}
                     <Route path="/search" element={<Search />} />
-                    <Route path="/:slug" element={<ProductPage />} /> {/* Rota dinâmica por último */}
+                    <Route path=":slug" element={<ProductPage />} /> {/* Rota dinâmica por último */}
                     </Routes>
                     <Footer/>
                   </>
