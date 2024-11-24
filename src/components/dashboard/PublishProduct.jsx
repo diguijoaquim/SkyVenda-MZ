@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import api from '../../api/api_fecher';
+import ReactQuill from 'react-quill';
 
 
 
