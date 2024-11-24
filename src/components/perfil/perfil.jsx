@@ -10,10 +10,14 @@ export default function Perfil() {
     const {user,isAuthenticated,logout}=useContext(AuthContext)
 
  return (
-  <div className="p-40">
-  <h1>User Data</h1>
-  <pre>{JSON.stringify(user, null, 2)}</pre>
-  {console.log(user.revisado)}
-</div>
+        <div className="p-40">
+            <h1>User Data</h1>
+            <pre>{JSON.stringify(user, null, 2)}</pre>
+            {user && user.revisado !== undefined ? (
+                <p>Revisado: {user.revisado ? true : false}</p>
+            ) : (
+                <p>Dados do usuário não disponíveis</p>
+            )}
+        </div>
  );
 } 
