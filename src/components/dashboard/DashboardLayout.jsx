@@ -74,6 +74,9 @@ function DashboardLayout({ children }) {
         <header className="bg-white/80 backdrop-blur-sm shadow-sm h-16 fixed right-0 left-0 z-20" style={{ left: isSidebarOpen ? '16rem' : '5rem' }}>
           <div className="h-full px-4 flex items-center justify-between">
             <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
+            {user && (
+          <h1>{user.revisado}</h1>
+        )}
             <div className="flex items-center space-x-4">
               <button className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-full transition-all duration-300 hover:scale-110">
                 <FiBell size={20} />
