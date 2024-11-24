@@ -5,12 +5,11 @@ import PublishProductCard from './PublishProduct';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
-
 function DashboardLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isPublishOpen, setIsPublishOpen] = useState(false);
   const location = useLocation();
-  const {user}=useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   const menuItems = [
     { icon: FiHome, label: 'Dashboard', path: '/dash' },
@@ -75,8 +74,8 @@ function DashboardLayout({ children }) {
           <div className="h-full px-4 flex items-center justify-between">
             <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-full transition-all duration-300 hover:scale-110">
               <span className="text-gray-600">{user?.revisado ? "Usuário Revisado" : "Não Revisado"}</span>
+              <button className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-full transition-all duration-300 hover:scale-110">
                 <FiBell size={20} />
               </button>
               <button className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-full transition-all duration-300 hover:scale-110">
@@ -86,8 +85,13 @@ function DashboardLayout({ children }) {
             </div>
           </div>
         </header>
-        {user && (
-          <h1>{user.revisado}</h1>
+
+        {/* Alert */}
+        {!user?.revisado && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-16 mx-4" role="alert">
+            <strong className="font-bold">Atenção!</strong>
+            <span className="block sm:inline"> Sua conta ainda não foi verificada. Por favor, entre em contato com o suporte.</span>
+          </div>
         )}
 
         {/* Main Content Area */}
