@@ -11,6 +11,7 @@ export default function Perfil() {
 
  return (
    <div className="p-40">
+    <h1 className="font-bold">Ola Perfil</h1>
         {isAuthenticated && (
             <h1>{user.revidado}</h1>
         )}
