@@ -13,6 +13,7 @@ export default function Perfil() {
   <div className="p-40">
   <h1>User Data</h1>
   <pre>{JSON.stringify(user, null, 2)}</pre>
+  {console.log(user)}
 </div>
  );
 } 
