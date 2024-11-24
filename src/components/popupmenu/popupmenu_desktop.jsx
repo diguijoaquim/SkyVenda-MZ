@@ -2,7 +2,7 @@ import React from "react";
 import { FiUser } from 'react-icons/fi';
 import { profileMenuItems } from "../../data/PopUpMenu";
 
-export default function PopupMenuDeskTop({ user, isAuthenticated, logout, handleNavigate,resivado }) {
+export default function PopupMenuDeskTop({ user, isAuthenticated, logout, handleNavigate }) {
  return (
     <div className="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-xl border border-gray-100 py-2 animate-fadeIn z-50">
     <div className="px-4 py-3 border-b border-gray-100">
@@ -11,7 +11,7 @@ export default function PopupMenuDeskTop({ user, isAuthenticated, logout, handle
           <FiUser size={24} />
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-gray-800">{user.name}</h3>
+          <h3 className="text-sm font-semibold text-gray-800">{user.resivado}</h3>
           <p className="text-xs text-gray-500">{user.resivado}</p>
         </div>
       </div>
