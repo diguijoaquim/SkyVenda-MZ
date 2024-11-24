@@ -1,7 +1,7 @@
 import { AuthContext } from "../../context/AuthContext"; // the context of autentication
 import { HomeContext } from "../../context/HomeContext"; // the context of the app
-import { useState } from "react";
-import React,{ useContext } from "react";
+import { useContext,useState } from "react";
+import React from "react";
 
 export default function Perfil() {
     //usando o authContext podemos saber se o usuario esta logado ou nao 
@@ -14,4 +14,4 @@ export default function Perfil() {
     <h1>{user}</h1>
    </div>
  );
-}
+} 
