@@ -10,8 +10,9 @@ export default function Perfil() {
     const {user,isAuthenticated,logout}=useContext(AuthContext)
 
  return (
-   <div className="p-40">
-    <h1>{user}</h1>
-   </div>
+  <div className="p-40">
+  <h1>User Data</h1>
+  <pre>{JSON.stringify(user, null, 2)}</pre>
+</div>
  );
 } 
