@@ -85,6 +85,9 @@ function DashboardLayout({ children }) {
             </div>
           </div>
         </header>
+        {user && (
+          <h1>{user.revisado}</h1>
+        )}
 
         {/* Main Content Area */}
         <main className="pt-16 px-4 min-h-screen">

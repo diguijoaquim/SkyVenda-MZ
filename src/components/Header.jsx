@@ -214,7 +214,7 @@ function Header() {
 
                 {/* Mobile Profile Popup */}
                 {isProfileOpen && isAuthenticated &&(
-                  <PopupMenuMobile user={{ name: user.name, email: user.email,revisado: "user.revisado" }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
+                  <PopupMenuMobile user={{ name: user.name, email: user.email,revisado: user.revisado }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
                 )}
               </div>
             </div>
