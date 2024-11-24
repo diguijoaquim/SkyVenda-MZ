@@ -94,8 +94,8 @@ function DashboardLayout({ children }) {
           >
             <strong className="font-bold">Atenção!</strong>
             <p className="block sm:inline">
-              Sua conta ainda não foi verificada. 
-              <a href="/perfil" className="underline text-red-600 hover:text-red-800">  Enviar para revisão</a>
+              Sua conta ainda não foi verificada.  
+              <a href="/perfil" className="underline text-red-600 hover:text-red-800">Enviar para revisão</a>
             </p>
           </div>
         )}
