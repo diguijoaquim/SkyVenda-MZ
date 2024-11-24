@@ -159,8 +159,17 @@ function Header() {
               </button>
 
               {/* Profile Popup Menu */}
-              {isProfileOpen && isAuthenticated &&(
-                <PopupMenuDeskTop user={{ name: user.name, email: user.email, revisado: "user.revisado" }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
+              {isProfileOpen && isAuthenticated && user && (
+                <PopupMenuDeskTop
+                  user={{
+                    name: user.name || '',
+                    email: user.email || '',
+                    revisado: user.revisado || false
+                  }}
+                  logout={logout}
+                  handleNavigate={handleNavigate}
+                  isAuthenticated={isAuthenticated}
+                />
               )}
 
             {isProfileOpen && !isAuthenticated &&(
