@@ -29,7 +29,7 @@ function ProductPage() {
         }
       }
       setLoading2(false);
-      axios.get(`produtos/detalhes/${slug}`)
+      axios.get(`https://skyvendamz.up.railway.app/produtos/detalhes/${slug}`)
     }
 
     fetchProduct();
