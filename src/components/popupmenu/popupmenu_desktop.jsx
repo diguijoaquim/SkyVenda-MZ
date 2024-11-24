@@ -11,7 +11,7 @@ export default function PopupMenuDeskTop({ user, isAuthenticated, logout, handle
           <FiUser size={24} />
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-gray-800">{user.revisado}</h3>
+          <h3 className="text-sm font-semibold text-gray-800">{user.name}</h3>
           <p className="text-xs text-gray-500">{user.email}</p>
         </div>
       </div>
