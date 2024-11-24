@@ -11,7 +11,7 @@ export default function Perfil() {
 
  return (
    <div className="p-40">
-    <h1>{user.revidado}</h1>
+    <h1>{user}</h1>
    </div>
  );
 }
