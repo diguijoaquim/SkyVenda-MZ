@@ -12,7 +12,7 @@ export default function PopupMenuDeskTop({ user, isAuthenticated, logout, handle
         </div>
         <div>
           <h3 className="text-sm font-semibold text-gray-800">{user.name}</h3>
-          <p className="text-xs text-gray-500">{resivado}</p>
+          <p className="text-xs text-gray-500">{user.resivado}</p>
         </div>
       </div>
     </div>
