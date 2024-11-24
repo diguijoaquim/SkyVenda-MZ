@@ -160,7 +160,7 @@ function Header() {
 
               {/* Profile Popup Menu */}
               {isProfileOpen && isAuthenticated &&(
-                <PopupMenuDeskTop user={{ name: user.name, email: user.email }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
+                <PopupMenuDeskTop user={{ name: user.name, email: user.email,revisado:user.revisado }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
               )}
 
             {isProfileOpen && !isAuthenticated &&(
