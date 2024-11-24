@@ -20,6 +20,7 @@ import Signup from './components/auth/Signup';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Search from './components/home/search';
+import Perfil from './components/perfil/perfil';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -52,6 +53,8 @@ function App() {
                       <Route path="/" element={<HomePage />} />
                       <Route path="/:slug" element={<ProductPage />} />
                       <Route path="/search" element={<Search />} />
+                      {/* Rotas do perfil */}
+                      <Route path="/perfil" element={<Perfil />} />
                     </Routes>
                     <Footer />
                   </>
