@@ -7,7 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Header from './components/Header';
+//import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/dashboard/Dashboard';
 import DashboardProduct from './components/dashboard/DashboardProduct';
@@ -21,6 +21,7 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Search from './components/home/search';
 import Perfil from './components/perfil/perfil';
+import Header from './components/Header1';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();

@@ -26,7 +26,9 @@ body {
     linear-gradient(to bottom, #00000008 1px, transparent 1px);
   background-size: 24px 24px;
 }
-
+.popup {
+  z-index: 9999;
+}
 /* Animations */
 @keyframes pulse-slow {
   0%, 100% { opacity: 0.7; }

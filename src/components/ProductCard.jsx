@@ -117,7 +117,7 @@ function ProductCard({ product }) {
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex-shrink-0">
-            <p className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {formatPrice(product.preco)}
             </p>
             <p className="text-sm text-gray-500 mt-1">{product.tempo}</p>
