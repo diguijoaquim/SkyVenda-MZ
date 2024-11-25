@@ -4,10 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import PublishProductCard from './PublishProduct';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { VerificationDialog } from '../Dialogs/Verificationdialog';
 
 function DashboardLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isPublishOpen, setIsPublishOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user } = useContext(AuthContext);
 
@@ -105,14 +107,17 @@ function DashboardLayout({ children }) {
         <main className="pt-16 px-4 min-h-screen">
           {children}
         </main>
-
+          <VerificationDialog 
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
         {/* FAB */}
         <button 
           onClick={() => {
             if(user?.revisado){
               setIsPublishOpen(true)
             }else{
-              alert("A sua conta nao foi revisada")
+              setIsOpen(true)
             }
           }}
           className="fixed right-8 bottom-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110 hover:rotate-180 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
