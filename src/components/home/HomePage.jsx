@@ -25,7 +25,7 @@ export default function HomePage() {
       <div className="bg-white/80 backdrop-blur-sm z-20 border-b">
       
       </div>
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-24">
         <PromotionalCards/>
         <PromotionalBanners/>
         <FeaturedProducts />
