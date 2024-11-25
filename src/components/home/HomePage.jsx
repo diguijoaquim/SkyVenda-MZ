@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import FeaturedProducts from '../FeaturedProducts';
 import { HomeContext } from '../../context/HomeContext'; // Certifique-se de que o caminho está correto
+import PromotionalCards from '../ads/Promotionalcards';
+import PromotionalBanners from '../ads/Promotionalbanner';
 
 export default function HomePage() {
   const { loading, startLoading, stopLoading } = useContext(HomeContext);
@@ -21,9 +23,11 @@ export default function HomePage() {
   return (
     <div>
       <div className="bg-white/80 backdrop-blur-sm z-20 border-b">
-      {/* <Stories stories={stories}/> */}
+      
       </div>
       <main className="container mx-auto px-4 py-8">
+        <PromotionalCards/>
+        <PromotionalBanners/>
         <FeaturedProducts />
       </main>
     </div>
