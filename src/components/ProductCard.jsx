@@ -126,9 +126,9 @@ function ProductCard({ product }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl font-medium shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <FiShoppingCart className="w-5 h-5" />
+            <FiShoppingCart className="" />
             <span className="hidden sm:inline">Comprar</span>
           </motion.button>
         </div>
