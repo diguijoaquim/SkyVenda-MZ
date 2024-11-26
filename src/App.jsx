@@ -22,7 +22,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 import Search from './components/home/search';
 import Perfil from './components/perfil/perfil';
 import Header from './components/Header1';
-
+import Form_Perfil from './components/perfil/form_perfil';
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
 
@@ -52,7 +52,9 @@ function App() {
                     <Header />
                     <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="profile" element={<Perfil />} /> {/* Rotas específicas primeiro */}
+                    <Route path="/profile" element={<Perfil />} /> {/* Rotas específicas primeiro */}
+                    <Route path="/profile/review" element={<Form_Perfil />} /> 
+                    
                     <Route path="/search" element={<Search />} />
                     <Route path=":slug" element={<ProductPage />} /> {/* Rota dinâmica por último */}
                     </Routes>

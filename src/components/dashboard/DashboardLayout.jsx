@@ -76,7 +76,7 @@ function DashboardLayout({ children }) {
           <div className="h-full px-4 flex items-center justify-between">
             <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-600">{user?.revisado ? "Usuário Revisado" : "Não Revisado"}</span>
+              <span className="text-gray-600">{user?.revisado=='sim' ? "Usuário Revisado" : "Não Revisado"}</span>
               <button className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-full transition-all duration-300 hover:scale-110">
                 <FiBell size={20} />
               </button>
@@ -89,7 +89,7 @@ function DashboardLayout({ children }) {
         </header>
 
         {/* Alert */}
-        {!user?.revisado && (
+        {!user?.revisado=="sim" && (
           <div 
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-24 mx-4" 
             role="alert"
@@ -114,7 +114,7 @@ function DashboardLayout({ children }) {
         {/* FAB */}
         <button 
           onClick={() => {
-            if(user?.revisado){
+            if(user?.revisado=="sim"){
               setIsPublishOpen(true)
             }else{
               setIsOpen(true)

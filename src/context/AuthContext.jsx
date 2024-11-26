@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
-
+  
   const getToken = async (username, password) => {
     const formData = new FormData();
     formData.append('username', username);
@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
         }
       });
       setUser(userResponse.data);
+      
       setIsAuthenticated(true);
     } catch (error) {
       if(error.message=="Network Error"){
@@ -97,6 +98,7 @@ export const AuthProvider = ({ children }) => {
           });
           setUser(response.data);
           setIsAuthenticated(true);
+          console.log(response.data)
         } catch (error) {
           console.error("Erro ao carregar usuário autenticado:", error);
           logout(); // Se o token for inválido, faz o logout
