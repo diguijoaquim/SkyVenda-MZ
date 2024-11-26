@@ -12,5 +12,6 @@ export function VerificationStatus({ estadoRevisao }) {
     return <PendingCard />;
   }
 
+  // Renderiza um formulário para usuários que ainda precisam verificar o perfil
   return <UserForm />;
 }
