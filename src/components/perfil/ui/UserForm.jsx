@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../../api/api_fecher';
 import { Upload, User, MapPin, Phone, Calendar, ArrowLeft, ArrowRight } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import StepIndicator from './StepIndicator';
@@ -63,8 +63,8 @@ export default function UserForm() {
     });
 
     try {
-      const response = await axios.post(
-        'http://192.168.1.62:8000/info_usuario/',
+      const response = await api.post(
+        '/info_usuario/',
         formDataToSend,
         {
           headers: {
