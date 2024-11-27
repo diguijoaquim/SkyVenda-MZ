@@ -27,28 +27,28 @@ function PromotionalBanners() {
       ),
       products: [
         {
-          image: "photo-1595950653106-6c9ebd614d3a",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Chinelos Confortáveis",
           price: "0.99",
           originalPrice: "16.42",
           discount: "94%"
         },
         {
-          image: "photo-1523275335684-37898b6baf30",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Smartwatch Pro",
           price: "4.39",
           originalPrice: "34.27",
           discount: "87%"
         },
         {
-          image: "photo-1595950653106-6c9ebd614d3a",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Tênis Esportivo",
           price: "6.36",
           originalPrice: "34.08",
           discount: "81%"
         },
         {
-          image: "photo-1595950653106-6c9ebd614d3a",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Pelúcia",
           price: "2.60",
           originalPrice: "26.01",

@@ -15,19 +15,19 @@ const PromotionalCards = () => {
         bgColor: "from-pink-50 to-red-50",
         items: [
           {
-            image: "/photo-1542291026-7eec264c27ff",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Tênis Esportivo",
             price: "2.45",
             discount: "85%"
           },
           {
-            image: " /photo-1483985988355-763728e1935b",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Roupas Esportivas",
             price: "4.57",
             discount: "80%"
           },
           {
-            image: " /photo-1518831959646-742c3a14ebf7",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Conjunto Infantil",
             price: "0.99",
             discount: "45%"
@@ -40,19 +40,19 @@ const PromotionalCards = () => {
         bgColor: "from-blue-50 to-purple-50",
         items: [
           {
-            image: " /photo-1576566588028-4147f3842f27",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Camiseta Esportiva",
             price: "9.99",
             extra: "2+ unidades, extra 2% off"
           },
           {
-            image: " /photo-1505740420928-5e560c06d30e",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Fones Bluetooth",
             price: "8.40",
             extra: "5+ unidades, extra 5% off"
           },
           {
-            image: " /photo-1542272604-787c3835535d",
+            image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
             title: "Jeans Premium",
             price: "7.11",
             extra: "51% off"
