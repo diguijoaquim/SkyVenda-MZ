@@ -85,7 +85,7 @@ function App() {
         </div>
       </LoadingProvider>
     </Router>
-  );
+  ); 
 }
 
 export default App;
