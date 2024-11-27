@@ -1,44 +1,44 @@
-import React, { memo } from 'react';
+import React, { useContext, useState } from 'react';
 import { FiStar, FiShoppingCart, FiHeart, FiEye, FiMessageCircle, FiMapPin } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import api from '../api/api_fecher';
 
-const formatPrice = (price) => {
+function formatPrice(price) {
   return new Intl.NumberFormat('pt-MZ', { style: 'currency', currency: 'MZN' })
     .format(price)
     .replace('MTn', 'MZN');
-};
+}
 
-const ProductCard = memo(({ product }) => {
-  const [isLiked, setIsLiked] = React.useState(product.liked);
-  const [likes, setLike] = React.useState(product.likes);
+function ProductCard({ product }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isLiked, setIsLiked] = useState(product.liked);
+  const [likes, setLike] = useState(product.likes);
   const navigate = useNavigate();
   const { isAuthenticated } = useContext(AuthContext);
 
-  const handleAddToCart = React.useCallback((e) => {
+  const handleAddToCart = (e) => {
     e.stopPropagation();
     toast.success(`${product.nome} adicionado ao carrinho!`);
-  }, [product.nome]);
+  };
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = () => {
     navigate(`/${product.slug}`);
-  }, [navigate, product.slug]);
+  };
 
-  const handleLike = React.useCallback((e) => {
+  const handleLike = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (isAuthenticated) {
-      setIsLiked(prev => !prev);
+      setIsLiked(!isLiked);
       setLike(prev => isLiked ? prev - 1 : prev + 1);
       api.post(`/produtos/${product.slug}/like`);
     } else {
       navigate('/login');
     }
-  }, [isAuthenticated, isLiked, navigate, product.slug]);
+  };
 
   return (
     <motion.div
@@ -46,18 +46,17 @@ const ProductCard = memo(({ product }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       onClick={handleClick}
       className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-500"
-      layout
     >
-      {/* Rest of the component remains the same */}
       {/* Image Section */}
       <div className="relative h-[240px] overflow-hidden">
         <img
           src={`https://skyvendamz.up.railway.app/produto/${product.capa}`}
           alt={product.nome}
           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         
@@ -145,7 +144,6 @@ const ProductCard = memo(({ product }) => {
       </div>
     </motion.div>
   );
-});
+}
 
-ProductCard.displayName = 'ProductCard';
 export default ProductCard;
