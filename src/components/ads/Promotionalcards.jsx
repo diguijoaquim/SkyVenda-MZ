@@ -68,7 +68,7 @@ const PromotionalCards = () => {
   }, []);
 
   if (loading) {
-    return <PromotionalCardsSkeleton />;
+    return <PromotionalCardsSkeleton />; 
   }
 
   return (
