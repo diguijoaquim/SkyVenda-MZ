@@ -14,12 +14,12 @@ function PromotionalBanners() {
       image: (
         <div className="relative w-full h-full">
           <img 
-            src="/laptop.png" 
+            src="" 
             alt="Laptop"
             className="absolute bottom-[-20px] right-[-20px] w-[120px] transform rotate-[-15deg]"
           />
           <img 
-            src="/watch.png" 
+            src="" 
             alt="Watch"
             className="absolute top-[20px] right-[20px] w-[80px]"
           />
