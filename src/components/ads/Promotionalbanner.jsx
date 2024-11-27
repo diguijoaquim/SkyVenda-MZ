@@ -63,28 +63,28 @@ function PromotionalBanners() {
       bgColor: 'bg-gradient-to-r from-[#00b3cc] to-[#0099ff]',
       products: [
         {
-          image: "photo-1539008835657-9e8e9680c956",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Vestido Elegante",
           price: "0.99",
           originalPrice: "22.03",
           discount: "95%"
         },
         {
-          image: "photo-1596703263926-eb0762ee17e4",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Calça Cargo",
           price: "2.86",
           originalPrice: "26.24",
           discount: "89%"
         },
         {
-          image: "photo-1548126032-079a0fb0099d",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Jaqueta Fashion",
           price: "13.03",
           originalPrice: "51.18",
           discount: "75%"
         },
         {
-          image: "photo-1548126032-079a0fb0099d",
+          image: "https://www.maisvendas.co.mz/images/listings/2024-11/medThmb/972fd7b0_2185_4cac_839e_a327906ebadajpeg-1732709411-593-e.jpeg",
           title: "Blusa Básica",
           price: "0.99",
           originalPrice: "13.97",
