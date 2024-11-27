@@ -1,8 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
+function PromotionalBannersSkeleton() {
+  return (
+    <div className="space-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {[1, 2].map((item) => (
+        <div key={item} className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 shadow-sm animate-pulse mb-4">
+          <div className="flex flex-col lg:flex-row gap-4">
+            {/* Banner Skeleton */}
+            <div className="w-full lg:w-[308px]">
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <div className="h-6 w-32 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 w-48 bg-gray-200 rounded"></div>
+                </div>
+                <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+              </div>
+            </div>
+
+            {/* Products Grid Skeleton */}
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {[1, 2, 3, 4].map((product) => (
+                <div key={product} className="bg-white rounded-lg p-2">
+                  <div className="w-full h-24 bg-gray-200 rounded-lg mb-2"></div>
+                  <div className="h-4 w-3/4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function PromotionalBanners() {
+  const [loading, setLoading] = useState(true);
+  console.log("PromotionalBanners")
   const banners = [
     {
       id: 'big-save',
@@ -80,12 +116,23 @@ function PromotionalBanners() {
     }
   ];
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <PromotionalBannersSkeleton />;
+  }
+
   return (
     <div className="space-y-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {banners.map((banner) => (
         <div key={banner.id} className="mb-4">
           <div className="flex flex-col lg:flex-row gap-4">
-            {/* Banner Card */}
             <div className={`w-full lg:w-[308px] h-[195px] ${banner.bgColor} rounded-lg p-4 cursor-pointer group relative overflow-hidden`}>
               <div className="relative h-full flex flex-col justify-between z-10">
                 <div>
@@ -115,7 +162,6 @@ function PromotionalBanners() {
               </div>
             </div>
 
-            {/* Product Grid */}
             <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-2">
               {banner.products.map((product, idx) => (
                 <motion.div

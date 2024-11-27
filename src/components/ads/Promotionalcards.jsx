@@ -71,6 +71,7 @@ const PromoCard = ({ title, subtitle, bgColor, items }) => (
 );
 
 const PromotionalCards = () => {
+  console.log("PromotionalCards")
   const [loading, setLoading] = useState(true);
   const [promotions, setPromotions] = useState([]);
 
