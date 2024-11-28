@@ -3,6 +3,8 @@ import { User, Edit, Eye, Mail, Building2, Users } from 'lucide-react';
 import ProfileSkeleton from '../skeleton/ProfileSkeleton';
 import VerificationBadge from '../skeleton/VerificationBadge';
 import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 function GlassCard({ children, className = '' }) {
   return (
@@ -85,11 +87,12 @@ function ProfileDetails({ email, type, isPro }) {
 }
 
 export default function Profile() {
-  const { user } = useContext(AuthContext);
-
+  const { user,isAuthenticated } = useContext(AuthContext);
+  const navigate=useNavigate()
   if (!user) {
     return <ProfileSkeleton />;
   }
+  
 
   const handleVerificationRequest = () => {
     console.log('Requesting verification...');

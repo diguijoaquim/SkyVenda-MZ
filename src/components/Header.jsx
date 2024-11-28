@@ -100,6 +100,7 @@ function Header() {
                       navigate(`/search?q=${searchTerm}`);
                     }
                   }}
+                  onMouseEnter={()=>console.log("entrou")}
                 />
                 <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500 transition-colors">
                   <FiSearch size={20} />
@@ -245,6 +246,7 @@ function Header() {
                         navigate(`/search?q=${searchTerm}`);
                       }
                     }}
+                    
                   />
                   <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500 transition-colors">
                     <FiSearch size={20} />

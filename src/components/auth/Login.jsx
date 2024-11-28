@@ -33,7 +33,6 @@ function Login() {
             SkyVenda MZ
           </h2>
           <p className="mt-2 text-gray-600">Bem-vindo de volta!</p>
-          <p className="mt-1 text-sm text-gray-500">Use admin/1234 to login</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">

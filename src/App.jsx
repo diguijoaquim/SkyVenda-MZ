@@ -24,11 +24,12 @@ import Perfil from './components/perfil/perfil';
 import Header from './components/Header1';
 import Form_Perfil from './components/perfil/form_perfil';
 import FullScreenLoader from './components/loaders/FullScreenLoader';
+import { useEffect } from 'react';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
 
-  React.useEffect(() => {
+ useEffect(() => {
     setCurrentRoute(location.pathname);
   }, [location, setCurrentRoute]);
 
@@ -56,11 +57,16 @@ function App() {
                         <Header />
                         <Routes>
                           <Route path="/" element={<HomePage />} />
-                          <Route path="/profile" element={<Perfil />} />
-                          <Route path="/profile/review" element={<Form_Perfil />} />
                           <Route path="/search" element={<Search />} />
                           <Route path=":slug" element={<ProductPage />} />
+
                         </Routes>
+                        <PrivateRoute>
+                          <Routes>
+                            <Route path="/profile" element={<Perfil />} />
+                            <Route path="/profile/review" element={<Form_Perfil />} />
+                          </Routes>
+                        </PrivateRoute>
                         <Footer/>
                       </>
                     }
