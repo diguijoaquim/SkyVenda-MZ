@@ -26,7 +26,7 @@ export default function Profile() {
 
     try {
       const response = await api.put(
-        `/info_usuario/perfil/`,
+        `/info_usuario/perfil`,
         formData,
         {
           headers: {
