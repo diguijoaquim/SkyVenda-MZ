@@ -8,7 +8,6 @@ import {
 import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer';
 import Dashboard from './pages/dashboard/Dashboard';
-import DashboardProduct from './pages/dashboard/DashboardProduct';
 import HomePage from './pages/Home';
 import ProductPage from './pages/ProductPage';
 import AnimatedBackground from './components/AnimatedBackground';
@@ -24,6 +23,8 @@ import Header from './components/Header1';
 import Form_Perfil from './pages/Profile/form_perfil';
 import FullScreenLoader from './components/loaders/FullScreenLoader';
 import { useEffect } from 'react';
+import DashboardProduct from './pages/dashboard/DashboardProduct';
+import DashboardLayout from './pages/dashboard/DashboardLayout';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -76,7 +77,11 @@ function App() {
                       <PrivateRoute>
                         <Routes>
                           <Route index element={<Dashboard />} />
-                          <Route path="product/:id" element={<DashboardProduct />} />
+                          <Route path="/products" element={<DashboardLayout><h1>Ola mundo</h1></DashboardLayout>} />
+                          <Route path="/customers" element={<DashboardLayout><h1>Clientes</h1></DashboardLayout>} />
+                          <Route path="/settings" element={<DashboardLayout><h1>Definicoes</h1></DashboardLayout>} />
+                          <Route path="/analytics" element={<DashboardLayout><h1>analytics</h1></DashboardLayout>} />
+                          <Route path="/messages" element={<DashboardLayout><h1>Mensagens</h1></DashboardLayout>} />
                         </Routes>
                       </PrivateRoute>
                     }
