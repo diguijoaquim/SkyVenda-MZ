@@ -25,7 +25,7 @@ const ProductCard = memo(({ product }) => {
   }, [product.nome]);
 
   const handleClick = React.useCallback(() => {
-    navigate(`/${product.slug}`);
+    navigate(`/post/${product.slug}`);
   }, [navigate, product.slug]);
 
   const handleLike = React.useCallback((e) => {

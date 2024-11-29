@@ -4,7 +4,7 @@ import { FiShoppingCart, FiHeart, FiStar } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { HomeContext } from '../context/HomeContext';
-import axios from 'axios';
+import api from '../api/api_fecher';
 
 
 function formatPrice(price) {
@@ -31,7 +31,7 @@ function ProductPage() {
         }
       }
       setLoading2(false);
-      axios.get(`https://skyvendamz.up.railway.app/produtos/detalhes/${slug}`)
+      api.get(`/produtos/detalhe/${slug}`)
     }
 
     fetchProduct();

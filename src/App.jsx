@@ -57,7 +57,7 @@ function App() {
                         <Routes>
                           <Route path="/" element={<HomePage />} />
                           <Route path="/search" element={<Search />} />
-                          <Route path=":slug" element={<ProductPage />} />
+                          <Route path="/post/:slug" element={<ProductPage />} />
 
                         </Routes>
                         <PrivateRoute>
