@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import Skeleton from "../../Skeleton";
-import ProductCard from "../../ProductCard";
-import api from "../../../api/api_fecher";
+import Skeleton from "../../components/Skeleton";
+import ProductCard from "../../components/ProductCard";
+import api from "../../api/api_fecher";
 
 const Search = () => {
   const [searchParams] = useSearchParams();

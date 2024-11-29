@@ -2,21 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail, FiLock, FiUser } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
-import ProgressRing from '../ProgressRing';
+import ProgressRing from '../../components/ProgressRing';
 import toast from 'react-hot-toast';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [username,setUsername]=useState('')
   const { signup, loading } = useAuth();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(name,email,username, password);
+      await signup(email, password, name);
       toast.success('Account created successfully!');
     } catch (error) {
       toast.error('Failed to create account');
@@ -57,19 +55,6 @@ function Signup() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Email"
-                />
-              </div>
-            </div>
-            <div>
-              <div className="relative">
-                <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="username"
                 />
               </div>
             </div>

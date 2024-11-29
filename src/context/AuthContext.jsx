@@ -100,9 +100,15 @@ export const AuthProvider = ({ children }) => {
           setIsAuthenticated(true);
           console.log(response.data)
         } catch (error) {
-          console.error("Erro ao carregar usuário autenticado:", error);
-          logout(); // Se o token for inválido, faz o logout
-          setIsAuthenticated(false);
+          if(error.message=="Network Error"){
+            console.log("Verifique a Ligacao")
+          }else if(error.status==401){
+            logout(); // Se o token for inválido, faz o logout
+            setIsAuthenticated(false);    
+          }else{
+            console.log("Ocorreu um erro")
+          }
+          
         }
       }
       setLoading(false); // Carregamento inicial completo

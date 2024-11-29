@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import PublishProductCard from './PublishProduct';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { VerificationDialog } from '../Dialogs/Verificationdialog';
+import { VerificationDialog } from '../../components/Dialogs/Verificationdialog';
 
 function DashboardLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
