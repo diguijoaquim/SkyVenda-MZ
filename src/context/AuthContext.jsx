@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
           if(error.message=="Network Error"){
             console.log("Verifique a Ligacao")
           }else if(error.status==401){
-            logout(); // Se o token for inválido, faz o logout
+            logout(); 
             setIsAuthenticated(false);    
           }else{
             console.log("Ocorreu um erro")

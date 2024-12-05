@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiUser, FiLock } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
-import ProgressRing from '../../components/ProgressRing';
+import ProgressRing from '../../components/loaders/ProgressRingtailwindcss';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
-
+import FullScreenLoader from '../../components/loaders/FullScreenLoader';
 function BotaoGoogle({ className = '', ...props }) {
     return (
       <button
@@ -27,18 +27,23 @@ function BotaoGoogle({ className = '', ...props }) {
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { getToken, loading, isAuthenticated } = useContext(AuthContext) // Removida a chamada duplicada
+  const { getToken, loading, isAuthenticated } = useContext(AuthContext) 
+  const [loginLoading,setloginloading]=useState(false)
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    setloginloading(true)
     e.preventDefault();
     try {
       await getToken(username, password);
-      toast.success('Login successful!');
+      setloginloading(false)
     } catch (error) {
       console.log("erro ao entrar")
+      setloginloading(false)
     }
   };
+  
+
 
 
   return (
@@ -82,10 +87,10 @@ export default function Login() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loginLoading}
             className="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300"
           >
-            {loading ? (
+            {loginLoading ? (
               <div className="w-6 h-6">
                 <ProgressRing />
               </div>
@@ -101,7 +106,7 @@ export default function Login() {
 
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <Link to="/forgot-password" className="text-blue-600 hover:text-blue-500">
+              <Link to="/recovery-password" className="text-blue-600 hover:text-blue-500">
                 Esqueceu a senha?
               </Link>
             </div>

@@ -6,7 +6,6 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Footer from './components/Footer';
 import Dashboard from './pages/dashboard/Dashboard';
 import HomePage from './pages/Home';
 import ProductPage from './pages/ProductPage';
@@ -19,12 +18,13 @@ import { LoadingProvider } from './context/LoadingContext';
 import PrivateRoute from './pages/Auth/PrivateRoute';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
-import Header from './components/Header1';
 import Form_Perfil from './pages/Profile/form_perfil';
 import FullScreenLoader from './components/loaders/FullScreenLoader';
 import { useEffect } from 'react';
 import DashboardProduct from './pages/dashboard/DashboardProduct';
 import DashboardLayout from './pages/dashboard/DashboardLayout';
+import { useAuth } from './context/AuthContext';
+import RecoveryPasseword from './pages/Auth/RecoveryPasseword';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -38,6 +38,7 @@ const RouteTracker = ({ setCurrentRoute }) => {
 
 function App() {
   const [currentRoute, setCurrentRoute] = React.useState('/');
+  
 
   return (
     <Router>
@@ -48,46 +49,66 @@ function App() {
           <AuthProvider>
             <HomeProvider>
               <Suspense fallback={<FullScreenLoader />}>
-                <RouteTracker setCurrentRoute={setCurrentRoute} />
-                <Routes>
-                  <Route
-                    path="/*"
-                    element={
-                      <>
-                        <Header />
-                        <Routes>
-                          <Route path="/" element={<HomePage />} />
-                          <Route path="/search" element={<Search />} />
-                          <Route path="/post/:slug" element={<ProductPage />} />
+              <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/recovery-password" element={<RecoveryPasseword />} />
 
-                        </Routes>
-                        <PrivateRoute>
-                          <Routes>
-                            <Route path="/profile" element={<Profile />} />
-                            <Route path="/profile/review" element={<Form_Perfil />} />
-                          </Routes>
-                        </PrivateRoute>
-                        <Footer/>
-                      </>
-                    }
-                  />
-                  <Route
+              <Route
                     path="/dash/*"
                     element={
                       <PrivateRoute>
                         <Routes>
                           <Route index element={<Dashboard />} />
-                          <Route path="/products" element={<DashboardLayout><h1>Ola mundo</h1></DashboardLayout>} />
-                          <Route path="/customers" element={<DashboardLayout><h1>Clientes</h1></DashboardLayout>} />
-                          <Route path="/settings" element={<DashboardLayout><h1>Definicoes</h1></DashboardLayout>} />
-                          <Route path="/analytics" element={<DashboardLayout><h1>analytics</h1></DashboardLayout>} />
-                          <Route path="/messages" element={<DashboardLayout><h1>Mensagens</h1></DashboardLayout>} />
+                          <Route
+                            path="/products"
+                            element={<DashboardLayout><h1>Produtos</h1></DashboardLayout>}
+                          />
+                          <Route
+                            path="/customers"
+                            element={<DashboardLayout><h1>Clientes</h1></DashboardLayout>}
+                          />
+                          <Route
+                            path="/settings"
+                            element={<DashboardLayout><h1>Definições</h1></DashboardLayout>}
+                          />
+                          <Route
+                            path="/analytics"
+                            element={<DashboardLayout><h1>Analytics</h1></DashboardLayout>}
+                          />
+                          <Route
+                            path="/messages"
+                            element={<DashboardLayout><h1>Mensagens</h1></DashboardLayout>}
+                          />
                         </Routes>
                       </PrivateRoute>
                     }
                   />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
+              </Routes>
+                <Routes>
+                  {/* Public Routes */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/post/:slug" element={<ProductPage />} />
+                  
+                  {/* Protected Routes */}
+                  <Route
+                    path="/profile"
+                    element={
+                      <PrivateRoute>
+                        <Profile />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile/review"
+                    element={
+                      <PrivateRoute>
+                        <Form_Perfil />
+                      </PrivateRoute>
+                    }
+                  />
+                  
                 </Routes>
               </Suspense>
             </HomeProvider>

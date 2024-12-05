@@ -246,3 +246,26 @@ body {
 .markdown-content hr {
   @apply my-8 border-t border-gray-200;
 }
+/* Estiliza a barra de rolagem em todo o app */
+::-webkit-scrollbar {
+  width: 8px; /* Largura da scrollbar */
+  height: 8px; /* Altura para scroll horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Cor do trilho */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e2e8ed; /* Cor da barra de rolagem */
+  border-radius: 10px;
+  border: 2px solid #f4f4f4; /* Espaço ao redor da barra */
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a3a7aa; /* Cor ao passar o mouse */
+  width: 8px; /* Largura da scrollbar */
+  height: 8px; /* Altura para scroll horizontal */
+}

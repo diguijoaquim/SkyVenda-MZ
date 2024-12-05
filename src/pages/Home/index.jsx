@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, lazy, Suspense } from 'react';
 import LoadingSpinner from '../../components/loaders/LoadingSpinner';
 import { HomeContext } from '../../context/HomeContext';
+import HomeLayout from '../../layout/Homelayout';
 
 
 // Lazy load components with explicit loading chunks
@@ -24,6 +25,7 @@ export default function HomePage() {
   return (
     <div>
       <div className="bg-white/80 backdrop-blur-sm z-20 border-b"></div>
+      <HomeLayout>
       <main className="container mx-auto px-4 py-24">
         <Suspense fallback={<LoadingSpinner />}>
           <div className="space-y-8">
@@ -41,6 +43,7 @@ export default function HomePage() {
           </div>
         </Suspense>
       </main>
+      </HomeLayout>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import ProgressRing from '../../components/ProgressRing';
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ children,currentRoute }) {
   const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
 
@@ -18,6 +18,7 @@ function PrivateRoute({ children }) {
   }
 
   if (!isAuthenticated) {
+    console.log(currentRoute)
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
