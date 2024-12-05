@@ -7,9 +7,19 @@ export default function PopupMenuMobile({ user, isAuthenticated, logout, handleN
       <div className="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-xl border border-gray-100 py-2 z-50">
         <div className="px-4 py-3 border-b border-gray-100">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
-              <FiUser size={20} />
-            </div>
+              {isAuthenticated ? (
+                      <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 p-[2px]">
+                        <img
+                          src={`https://skyvendamz.up.railway.app/perfil/${user.perfil}`}
+                          alt="Profile"
+                          className="w-full h-full rounded-full border-2 border-white"
+                        />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 flex items-center justify-center text-white">
+                    <FiUser size={20} />
+                  </div>
+                )}
             <div>
               <h3 className="text-sm font-semibold text-gray-800">{user.name}</h3>
               <p className="text-xs text-gray-500">{user.email}</p>

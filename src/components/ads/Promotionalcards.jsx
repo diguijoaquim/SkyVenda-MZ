@@ -72,7 +72,7 @@ const PromotionalCards = () => {
   }
 
   return (
-    <div className="max-w-screen-lg mx-auto p-4">
+    <div className=" p-4 py-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         {promotions.map((promo, index) => (
           <AdCard

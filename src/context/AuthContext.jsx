@@ -80,9 +80,13 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200 || res.status === 201) {
         toast.success("Cadastrado com sucesso");
       }
-    } catch (err) {
-      console.error("Erro no cadastro:", err.response ? err.response.data : err.message);
-      toast.error("Falha no cadastro. Tente novamente.");
+    } catch (error) {
+      if(error.message=="Network Error"){
+        toast.error("Verifique a Ligacao")
+      }else{
+        toast.error("Falha no cadastro. Tente novamente.");
+      }
+      
     }
   };
 

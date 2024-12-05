@@ -149,14 +149,25 @@ function Header() {
               </span>
             </button>
             <div className="relative" ref={profileRef}>
-              <button
+            <button
                 onClick={toggleProfileMenu}
-                className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 relative cursor-pointer"
+                className="relative flex items-center space-x-2 cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
-                  <FiUser size={20} />
-                </div>
+                {isAuthenticated ? (
+                  <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 p-[2px]">
+                    <img
+                      src={`https://skyvendamz.up.railway.app/perfil/${user.perfil}`}
+                      alt="Profile"
+                      className="w-full h-full rounded-full border-2 border-white"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 flex items-center justify-center text-white">
+                    <FiUser size={20} />
+                  </div>
+                )}
               </button>
+
 
               {/* Profile Popup Menu */}
               {isProfileOpen && isAuthenticated && user && (
@@ -164,7 +175,8 @@ function Header() {
                   user={{
                     name: user.name || '',
                     email: user.email || '',
-                    revisado: user.revisado || false
+                    revisado: user.revisado || false,
+                    perfil: user.perfil || ''
                   }}
                   logout={logout}
                   handleNavigate={handleNavigate}
@@ -214,7 +226,7 @@ function Header() {
 
                 {/* Mobile Profile Popup */}
                 {isProfileOpen && isAuthenticated &&(
-                  <PopupMenuMobile user={{ name: user.name, email: user.email,revisado: user.revisado }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
+                  <PopupMenuMobile user={{ name: user.name, email: user.email,revisado: user.revisado,perfil: user.perfil }} logout={logout} handleNavigate={handleNavigate} isAuthenticated={isAuthenticated}/>
                 )}
               </div>
             </div>

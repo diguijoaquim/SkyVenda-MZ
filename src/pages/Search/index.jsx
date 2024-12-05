@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import Skeleton from "../../components/Skeleton";
 import ProductCard from "../../components/ProductCard";
 import api from "../../api/api_fecher";
+import SearchLayout from "../../layout/SearchLayout";
+import adsRow from "../../components/ads/addRow";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -32,7 +34,10 @@ const Search = () => {
   }, [query]);
 
   return (
-    <div className="p-4">
+    <SearchLayout>
+      <adsRow/>
+
+      <div className="p-4">
       {loading ? (
         <Skeleton />
       ) : error ? (
@@ -55,6 +60,7 @@ const Search = () => {
         </div>
       )}
     </div>
+    </SearchLayout>
   );
 };
 

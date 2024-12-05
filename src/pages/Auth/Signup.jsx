@@ -13,12 +13,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await signup(email, password, name);
-      toast.success('Account created successfully!');
-    } catch (error) {
-      toast.error('Failed to create account');
-    }
+    await signup(email, password, name);
   };
 
   return (
