@@ -1,7 +1,7 @@
 import React from 'react';
 import { Store, Home, Package, Users, Settings, LogOut } from 'lucide-react';
 import { NavigationItem } from './NavigationItem';
-import { UserProfile } from './UserProfile';
+import { UserProfile } from './Userprofile';
 import { OfflineIndicator } from './OfflineIndicator';
 import { useAuth } from '../context/AuthContext';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
