@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 export function UserProfile({ user }) {
   return (
     <div className="w-full p-2">
