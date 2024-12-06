@@ -11,7 +11,7 @@ export function Sidebar() {
   const isOffline = useOnlineStatus();
 
   return (
-    <aside className="w-[280px] h-[calc(100vh-74.5px)] bg-white/30 backdrop-blur-md border-r border-gray-200">
+    <aside className="w-[280px] h-[calc(100vh-66px)] bg-white/30 backdrop-blur-md border-r border-gray-200">
       <div className="flex flex-col h-full">
         {/* User Profile */}
         {isAuthenticated && user && <UserProfile user={user} />}

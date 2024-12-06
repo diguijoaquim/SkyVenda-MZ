@@ -20,7 +20,7 @@ export default function HomeLayout({children}) {
   <Sidebar/>
   </div>
      
-    <div className="h-[calc(100vh-74.5px)] overflow-y-auto w-[93%]" > 
+    <div className="h-[calc(100vh-66px)] overflow-y-auto w-[93%]" > 
     {children}
     </div>
    </div>

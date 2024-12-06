@@ -8,6 +8,7 @@ import PopUpMenu from './popupmenu/popup_menu';
 import PopupMenuDeskTop from './popupmenu/popupmenu_desktop';
 import PopupMenuMobile from './popupmenu/popup_menu_mobile';
 import { suggestedProducts } from '../data/sugest';
+import { Notifications } from './popupmenu/notifications';
 
 
 function Header() {
@@ -17,10 +18,12 @@ function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isNotificationOpen,setIsNotificationOpen] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
   const menuClickedRef = useRef(false);
   const {user,isAuthenticated,logout}=useContext(AuthContext)
+  const NotificationRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,6 +36,10 @@ function Header() {
       // Se o clique foi fora do menu, fechamos ele
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileOpen(false);
+        
+      }
+      if(NotificationRef.current && !NotificationRef.current.contains(event.target)){
+        setIsNotificationOpen(false)
       }
     };
 
@@ -62,6 +69,9 @@ function Header() {
     setIsSearchOpen(false);
     setShowSuggestions(false)
   };
+  const hangleNotification=()=>{
+    setIsNotificationOpen(!isNotificationOpen)
+  }
 
   const toggleProfileMenu = () => {
     menuClickedRef.current = true;
@@ -69,10 +79,10 @@ function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 shadow-sm sticky top-0 z-50 ">
       <div className="container mx-auto px-4">
         {/* Desktop Header */}
-        <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-4">
+        <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-2">
           <div className="flex items-center mb-4 md:mb-0">
             <button 
               onClick={() => handleNavigate('/')} 
@@ -90,7 +100,7 @@ function Header() {
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
-                  setShowSuggestions(true); // Ativa as sugestões quando digita
+                  setShowSuggestions(true); 
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -98,6 +108,7 @@ function Header() {
                     navigate(`/search?q=${searchTerm}`)
                   }
                 }}
+                onFocus={()=>console.log(1)}
               />
 
               <button  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500">
@@ -127,12 +138,14 @@ function Header() {
             )}
           </div>
           <div className="flex items-center space-x-6">
-            <button onClick={() => handleNavigate('/notifications')} className="text-gray-600 hover:text-blue-600 relative">
+            <div className='hover:bg-indigo-200 w-[40px] h-[40px] rounded-full flex items-center justify-center'>
+            <button onClick={() => hangleNotification()} className="text-gray-600 hover:text-blue-600 relative">
               <FiBell size={24} />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-[18px] h-[18px] flex items-center justify-center">
                 3
               </span>
             </button>
+            </div>
             <button onClick={() => handleNavigate('/messages')} className="text-gray-600 hover:text-blue-600 relative">
               <FiMessageSquare size={24} />
               <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-[18px] h-[18px] flex items-center justify-center">
@@ -187,6 +200,9 @@ function Header() {
             {isProfileOpen && !isAuthenticated &&(
                 <PopUpMenu  handleNavigate={handleNavigate}/>
               )}
+            {isNotificationOpen &&(
+              <Notifications/>
+            )}
             </div>
           </div>
         </div>
@@ -268,13 +284,20 @@ function Header() {
                 5
               </span>
             </button>
-            <button onClick={() => handleNavigate('/notifications')} className="text-gray-600 flex flex-col items-center relative">
+            <button onClick={() => hangleNotification()} className="text-gray-600 flex flex-col items-center relative" >
               <FiBell size={24} />
               <span className="text-xs mt-1">Notificações</span>
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-[18px] h-[18px] flex items-center justify-center">
                 3
               </span>
             </button>
+            {isNotificationOpen &&(
+              <div ref={NotificationRef}>
+                <Notifications/>
+              </div>
+
+              
+            )}
             <button onClick={handleMobileMenuClick} className="text-gray-600 flex flex-col items-center">
               <FiMenu size={24} />
               <span className="text-xs mt-1">Menu</span>

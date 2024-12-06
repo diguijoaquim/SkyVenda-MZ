@@ -4,7 +4,7 @@ import Skeleton from "../../components/Skeleton";
 import ProductCard from "../../components/ProductCard";
 import api from "../../api/api_fecher";
 import SearchLayout from "../../layout/SearchLayout";
-import adsRow from "../../components/ads/addRow";
+
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -35,7 +35,7 @@ const Search = () => {
 
   return (
     <SearchLayout>
-      <adsRow/>
+      
 
       <div className="p-4">
       {loading ? (

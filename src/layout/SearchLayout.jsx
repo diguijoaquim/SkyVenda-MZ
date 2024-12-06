@@ -63,7 +63,7 @@ export default function SearchLayout({children}) {
    <div>
     <Header/>
     <div className="flex">
-    <div className=" w-[320px] bg-white/30 h-[calc(100vh-74.5px)] overflow-y-auto flex-col justify-center items-center p-2 px[5px] space-y-2">
+    <div className=" w-[320px] bg-white/30 h-[calc(100vh-74.5px)] overflow-y-auto flex-col justify-center items-center p-2 px[5px] space-y-2 hidden md:block ">
     
     <div className="w-[266px] h-[45px] rounded-md bg-white/40 hover:bg-indigo-500 hover:text-white flex items-center px-3 border-blue-200 space-x-2">
       <label className="font-bold">Tecnologia && Eletronica</label>
@@ -81,18 +81,21 @@ export default function SearchLayout({children}) {
       <label className="font-bold">Mobiliarios</label>
     </div>
     <div className="w-[266px] h-[350px] rounded-md bg-white/30 border-blue-200 shadow-md p-4 space-y-2 overflow-y-auto">
-      <label className="text-black">Melhores Boladas</label>
-    {sideAds.map((item)=>(
-      <div className="flex gap-2 h-[90px] bg-white/40 p-3 border rounded-md hover:bg-indigo-100">
-      <img src={item.image} className="w-[80px]"></img>
+  <label className="text-black">Melhores Boladas</label>
+  {sideAds.map((item, index) => (
+    <div
+      className="flex gap-2 h-[90px] bg-white/40 p-3 border rounded-md hover:bg-indigo-100"
+      key={`sideAd-${index}`} // Chave única para cada item
+    >
+      <img src={item.image} className="w-[80px]" alt={item.title} />
       <div className="flex-col">
         <p className="font-bold">{item.title}</p>
         <label className="text-wrap text-sm text-gray-500">{item.descriptio}</label>
-
       </div>
     </div>
-    ))}
-    </div>
+  ))}
+</div>
+
     </div>
   
     <div className="h-[calc(100vh-74.5px)] overflow-y-auto w-[93%]" > 
@@ -103,11 +106,13 @@ export default function SearchLayout({children}) {
         <h2 className="text-xl font-bold">Super Boladas</h2>
         <p className="text-sm text-gray-600">Aproveite as melhores boladas do dia</p>
       </div>
-        <div className=" flex gap-4">
-        {ads.map((ad)=>(
-            <div className="bg-white rounded-lg p-2 cursor-pointer hover:shadow-md 
-            transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-            <div className="relative">
+      <div className="flex gap-4 flex-wrap">
+        {ads.map((ad, index) => (
+          <div
+            className="bg-white rounded-lg p-2 cursor-pointer hover:shadow-md transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+            key={`ad-${index}`} // Chave única para cada anúncio
+          >
+            <div className="relative w-full sm:w-[140px]">
               <img
                 src={ad.image}
                 alt={ad.title}
@@ -119,10 +124,10 @@ export default function SearchLayout({children}) {
             <div className="flex items-center space-x-2">
               <span className="text-sm font-bold">{ad.price}</span>
             </div>
+          </div>
+        ))}
+      </div>
 
-            </div>
-            ))}
-        </div>
         </div>
       </div>
 
