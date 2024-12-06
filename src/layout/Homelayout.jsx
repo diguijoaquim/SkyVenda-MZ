@@ -15,7 +15,10 @@ export default function HomeLayout({children}) {
     <Header/>
     
     <div className="flex">
+  
+  <div className="hidden md:block">
   <Sidebar/>
+  </div>
      
     <div className="h-[calc(100vh-74.5px)] overflow-y-auto w-[93%]" > 
     {children}
