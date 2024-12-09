@@ -9,9 +9,10 @@ import { HomeContext } from '../context/HomeContext';
 import ProgressRing from './loaders/ProgressRingtailwindcss';
 import { AuthContext } from '../context/AuthContext';
 import api from '../api/api_fecher';
+import { ModernCard } from './cards/ModernCard';
 
 // Memoized ProductCard wrapper
-const MemoizedProductCard = memo(ProductCard);
+const MemoizedProductCard = memo(ModernCard);
 const MemoizedSponsoredCard = memo(SponsoredProductCard);
 
 // Memoized product renderer
