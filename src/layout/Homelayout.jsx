@@ -12,9 +12,11 @@ export default function HomeLayout({children}) {
     
  return (
    <div>
+    
     <Header/>
     
     <div className="flex">
+  
   
   <div className="hidden md:block">
   <Sidebar/>

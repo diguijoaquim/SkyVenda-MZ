@@ -13,11 +13,7 @@ const HomeProvider = ({ children }) => {
   const [produtos, setProdutos] = useState([]);
   const [user_id, setUserID] = useState(localStorage.getItem('user_id') || 0);
   const { setIsLoading } = useLoading();
-  const [hasConected,setHasConected]=useState(true)
 
-  const checkConection=async ()=>{
-    return true
-  }
   const LoadData = useCallback(async () => {
     try {
       setIsLoading(true);

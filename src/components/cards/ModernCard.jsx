@@ -5,12 +5,14 @@ import { Card } from '../ui/card';
 import { cn } from '../../lib/utils';
 import { Button } from '../ui/button';
 import { useToast } from '../../hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 export function ModernCard({ product }) {
   const [isLiked, setIsLiked] = useState(product.liked);
   const [likesCount, setLikesCount] = useState(product.likes);
   const { toast } = useToast();
+  const navigate=useNavigate()
 
   const handleLike = useCallback((e) => {
     e.preventDefault();
@@ -88,20 +90,26 @@ export function ModernCard({ product }) {
               <Heart className={cn("h-4 w-4", isLiked && "fill-current text-red-500")} />
               <span className="text-xs">{likesCount}</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 hover:text-indigo-500
+             hover:border hover:p-1 rounded-md border-indigo-400" onClick={()=>{
+
+             }}>
               <MessageCircle className="h-4 w-4" />
               <span className="text-xs">{product.comentario}</span>
+              
             </div>
           </div>
           <Button
             variant="outline"
             size="sm"
             className="text-xs"
+            onClick={()=>navigate(`/post/${product.slug}`)}
           >
             Ver Detalhes
           </Button>
         </div>
       </div>
+      
     </Card>
   );
 }

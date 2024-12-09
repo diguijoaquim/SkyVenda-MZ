@@ -25,6 +25,7 @@ import DashboardProduct from './pages/dashboard/DashboardProduct';
 import DashboardLayout from './pages/dashboard/DashboardLayout';
 import { useAuth } from './context/AuthContext';
 import RecoveryPasseword from './pages/Auth/RecoveryPasseword';
+import HomeLayout from './layout/Homelayout';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -89,7 +90,7 @@ function App() {
                   {/* Public Routes */}
                   <Route path="/" element={<HomePage />} />
                   <Route path="/search" element={<Search />} />
-                  <Route path="/post/:slug" element={<ProductPage />} />
+                  <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
                   
                   {/* Protected Routes */}
                   <Route
