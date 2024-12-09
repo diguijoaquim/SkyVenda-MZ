@@ -14,20 +14,17 @@ export default function HomeLayout({children =<Profile/>}) {
     
  return (
    <div>
-    
-    <Header/>
-    
-    <div className="flex">
-  
-  
-  <div className="hidden md:block">
-  <Sidebar/>
-  </div>
-     
-    <div className="h-[calc(100vh-66px)] overflow-y-auto w-[93%]" > 
-    {children}
-    </div>
-   </div>
+
+      <Header/>
+      
+      <div className="md:flex">
+        <div className="hidden md:block">
+        <Sidebar/>
+        </div>
+        <div className="h-[calc(100vh-66px)] overflow-y-auto w-[100%]" > 
+        {children}
+        </div>
+      </div>
    </div>
  );
 }
