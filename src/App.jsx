@@ -26,6 +26,7 @@ import DashboardLayout from './pages/dashboard/DashboardLayout';
 import { useAuth } from './context/AuthContext';
 import RecoveryPasseword from './pages/Auth/RecoveryPasseword';
 import HomeLayout from './layout/Homelayout';
+import PageNotFound from './pages/404';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -97,7 +98,7 @@ function App() {
                     path="/profile"
                     element={
                       <PrivateRoute>
-                        <Profile />
+                        <HomeLayout><Profile /></HomeLayout>
                       </PrivateRoute>
                     }
                   />
@@ -109,13 +110,14 @@ function App() {
                       </PrivateRoute>
                     }
                   />
-                  
+                  <Route path="*" element={<PageNotFound/>} />
                 </Routes>
               </Suspense>
             </HomeProvider>
           </AuthProvider>
         </div>
       </LoadingProvider>
+      
     </Router>
   );
 }

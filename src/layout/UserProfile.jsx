@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function UserProfile({ user }) {
+  const navigate=useNavigate()
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-2" onClick={()=>navigate('/profile')}>
       <div className="w-full h-[60px] rounded-lg bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 flex items-center px-4 gap-3">
         <div className="relative">
           <div className="w-9 h-19 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 p-[2px]">
