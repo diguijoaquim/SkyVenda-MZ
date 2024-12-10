@@ -203,7 +203,7 @@ function CommentsModal({ isOpen, onClose, user, avatar, commentarios,slug }) {
             comments.map((comment) => (
               <div key={comment.id} className="flex gap-4">
                 <img
-                  src={comment.user?.avatar}
+                  src={`https://skyvendamz.up.railway.app/perfil/${comment.user?.avatar}`}
                   alt={comment.user?.name}
                   className="w-10 h-10 rounded-full object-cover"
                 />
