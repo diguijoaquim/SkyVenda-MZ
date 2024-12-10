@@ -108,7 +108,7 @@ function Header() {
                     navigate(`/search?q=${searchTerm}`)
                   }
                 }}
-                onFocus={()=>console.log(1)}
+                onFocus={()=>setIsCartOpen(true)}
               />
 
               <button  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500">

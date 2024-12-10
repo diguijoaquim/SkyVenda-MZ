@@ -1,56 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { MapPin, Eye, Heart, Star, ChevronLeft, ChevronRight, MessageCircle, X, Send } from 'lucide-react';
+import { useContext } from 'react';
+import { HomeContext } from '../context/HomeContext';
+import api from '../api/api_fecher';
+import { useParams } from 'react-router-dom';
+import { FiShoppingCart, FiHeart, FiStar } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
-// Mock data for the property
-const mockProperty = {
-  id: 3,
-  nome: "venda de Casa",
-  capa: "0a0643fc-57d6-45aa-867f-5a73d20d8f29.png",
-  fotos: [
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&q=80",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2053&q=80",
-    "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-  ],
-  preco: 9000000,
-  quantidade_estoque: 1,
-  estado: "electronics",
-  provincia: "maputo",
-  distrito: "xai-xai",
-  descricao: "Luxurious modern house located in a prime area of Xai-Xai, Maputo. This stunning property features spacious rooms, high-end finishes, and a beautiful garden. Perfect for families looking for comfort and elegance.",
-  view: 17,
-  likes: 1,
-  tempo: "há 11 dias",
-  usuario: {
-    id: 1,
-    nome: "jorge paulo",
-    foto: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    media_estrelas: 4.5
-  }
-};
 
-// Mock data for comments
-const mockComments = [
-  {
-    id: 1,
-    user: {
-      name: "Maria Silva",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-    },
-    text: "Beautiful property! Is it still available?",
-    date: "2 days ago"
-  },
-  {
-    id: 2,
-    user: {
-      name: "João Santos",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-    },
-    text: "What's the total area of the property?",
-    date: "3 days ago"
-  }
-];
-
+function formatPrice(price) {
+  return new Intl.NumberFormat('pt-MZ', { style: 'currency', currency: 'MZN' })
+    .format(price)
+    .replace('MTn', 'MZN'); // Substitui MTn por MZN, se necessário
+}
 // Image Gallery Component
 function ImageGallery({ images }) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -149,9 +111,9 @@ function PropertyStats({ property, onCommentsClick }) {
 }
 
 // Comments Modal Component
-function CommentsModal({ isOpen, onClose }) {
+function CommentsModal({ isOpen, onClose,commentarios }) {
   const [newComment, setNewComment] = useState("");
-  const [comments, setComments] = useState(mockComments);
+  const [comments, setComments] = useState(commentarios);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -190,13 +152,13 @@ function CommentsModal({ isOpen, onClose }) {
           {comments.map((comment) => (
             <div key={comment.id} className="flex gap-4">
               <img
-                src={comment.user.avatar}
-                alt={comment.user.name}
+                src={comment.user?.avatar}
+                alt={comment.user?.name}
                 className="w-10 h-10 rounded-full object-cover"
               />
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-medium">{comment.user.name}</span>
+                  <span className="font-medium">{comment.user?.name}</span>
                   <span className="text-sm text-gray-500">{comment.date}</span>
                 </div>
                 <p className="text-gray-700 mt-1">{comment.text}</p>
@@ -232,18 +194,18 @@ function CommentsModal({ isOpen, onClose }) {
 function SellerCard({ user }) {
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm">
-      <h2 className="text-xl font-semibold mb-4">Seller Information</h2>
+      <h2 className="text-xl font-semibold mb-4">Nhonguista</h2>
       <div className="flex items-center gap-4">
         <img
-          src={user.foto}
-          alt={user.nome}
+          src={`https://skyvendamz.up.railway.app/perfil/${user?.avatar}`}
+          alt={user?.name}
           className="w-16 h-16 rounded-full object-cover"
         />
         <div>
-          <p className="font-medium text-lg">{user.nome}</p>
+          <p className="font-medium text-lg">{user?.name}</p>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            <span>{user.media_estrelas || 'New Seller'}</span>
+            <span>{'New Seller'}</span>
           </div>
         </div>
       </div>
@@ -264,13 +226,35 @@ function PropertyDescription({ description }) {
 // Main Product Page Component
 function ProductPage() {
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const { slug } = useParams();
+  const { loading, setLoading, produtos } = useContext(HomeContext);
+  const [product, setProduct] = useState(null);
+  const [loading2, setLoading2] = useState(loading);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      if (produtos.length > 0) {
+        setLoading2(true)
+        const produto = produtos.find(p => p.slug === slug);
+        if (produto) {
+          setProduct(produto);
+        }else{
+          
+        }
+      }
+      setLoading2(false);
+      axios.get(`https://skyvendamz.up.railway.app/produtos/detalhes/${slug}`)
+    }
+
+    fetchProduct();
+  }, [slug, produtos]);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <ImageGallery images={mockProperty.fotos} />
+            <ImageGallery images={product.fotos} />
           </div>
           <div className="space-y-6">
             <PropertyHeader property={mockProperty} />
@@ -278,16 +262,22 @@ function ProductPage() {
               property={mockProperty} 
               onCommentsClick={() => setIsCommentsOpen(true)}
             />
-            <SellerCard user={mockProperty.usuario} />
-            <PropertyDescription description={mockProperty.descricao} />
+            <SellerCard user={product?.user} />
+            <PropertyDescription description={product.description} />
           </div>
         </div>
-      </div>
-      
+      </div>  <CommentsModal 
+        isOpen={isCommentsOpen} 
+        onClose={() => setIsCommentsOpen(false)} 
+      /> */}
+      <SellerCard user={product?.user} />
+      <PropertyDescription description={product.description} />
       <CommentsModal 
         isOpen={isCommentsOpen} 
         onClose={() => setIsCommentsOpen(false)} 
+        commentarios={product?.comments || []}
       />
+      
     </div>
   );
 }

@@ -34,7 +34,7 @@ export function ModernCard({ product }) {
       <div className="relative h-60">
         <img
           src={'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80'}
-          alt={product.nome}
+          alt={product.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <Button
@@ -50,7 +50,7 @@ export function ModernCard({ product }) {
         </Button>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
           <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white text-sh line-clamp-2">
-            {product.nome}
+            {product.title}
           </h3>
         </div>
       </div>
@@ -60,22 +60,22 @@ export function ModernCard({ product }) {
             <div className="flex items-center gap-2 text-muted-foreground">
               <MapPin className="h-4 w-4" />
               <span className="text-xs sm:text-sm">
-                {product.distrito}, {product.provincia}
+                {product.district}, {product.province}
               </span>
             </div>
             <span className="text-sm sm:text-base font-bold text-indigo-600">
-              {formatCurrency(product.preco)}
+              {formatCurrency(product.price)}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <img
-              src={`https://skyvendamz.up.railway.app/perfil/${product.usuario.foto}`}
-              alt={product.usuario.nome}
+              src={`https://skyvendamz.up.railway.app/perfil/${product.user.avatar}`}
+              alt={product.user.name}
               className="h-8 w-8 rounded-full object-cover"
             />
             <div>
-              <p className="text-sm font-medium">{product.usuario.nome}</p>
-              <p className="text-xs text-muted-foreground">{product.tempo}</p>
+              <p className="text-sm font-medium">{product.user.name}</p>
+              <p className="text-xs text-muted-foreground">{product.time}</p>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@ export function ModernCard({ product }) {
           <div className="flex items-center gap-3 text-muted-foreground">
             <div className="flex items-center gap-1">
               <Eye className="h-4 w-4" />
-              <span className="text-xs">{product.view}</span>
+              <span className="text-xs">{product.views}</span>
             </div>
             <div className="flex items-center gap-1">
               <Heart className={cn("h-4 w-4", isLiked && "fill-current text-red-500")} />
@@ -95,7 +95,7 @@ export function ModernCard({ product }) {
 
              }}>
               <MessageCircle className="h-4 w-4" />
-              <span className="text-xs">{product.comentario}</span>
+              <span className="text-xs">{product?.comments?.length || 0}</span>
               
             </div>
           </div>
