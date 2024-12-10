@@ -22,6 +22,8 @@ const HomeProvider = ({ children }) => {
       
       const response = await api.get(`/produtos/?user_id=${user_id}&limit=3&offset=0`);
       setProdutos(response.data);
+      console.log(response.data)
+      
     } catch (err) {
       if (err.message === "Network Error" || err.message === "ERR_NETWORK") {
         toast.error("Verifique a sua rede");

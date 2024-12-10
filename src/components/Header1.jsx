@@ -9,6 +9,7 @@ import PopupMenuDeskTop from './popupmenu/popupmenu_desktop';
 import PopupMenuMobile from './popupmenu/popup_menu_mobile';
 import { suggestedProducts } from '../data/sugest';
 import { Notifications } from './popupmenu/notifications';
+import SearchCard from './popupmenu/searchCard';
 
 
 function Header() {
@@ -18,12 +19,15 @@ function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSearchCard, setShowSearchCard] = useState(false);
+  
   const [isNotificationOpen,setIsNotificationOpen] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
   const menuClickedRef = useRef(false);
   const {user,isAuthenticated,logout}=useContext(AuthContext)
   const NotificationRef = useRef(null);
+  const SearchcardRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -40,6 +44,9 @@ function Header() {
       }
       if(NotificationRef.current && !NotificationRef.current.contains(event.target)){
         setIsNotificationOpen(false)
+      }
+      if(SearchcardRef.current && !SearchcardRef.current.contains(event.target)){
+        setShowSearchCard(false)
       }
     };
 
@@ -81,6 +88,9 @@ function Header() {
   return (
     <header className="bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 shadow-sm sticky top-0 z-50 ">
       <div className="container mx-auto px-4">
+      {showSearchCard && (<div ref={SearchcardRef}> 
+        <SearchCard />
+      </div>)}
         {/* Desktop Header */}
         <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-2">
           <div className="flex items-center mb-4 md:mb-0">
@@ -108,12 +118,14 @@ function Header() {
                     navigate(`/search?q=${searchTerm}`)
                   }
                 }}
-                onFocus={()=>setIsCartOpen(true)}
+                onFocus={()=>setShowSearchCard(!showSearchCard)}
               />
 
               <button  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500">
                 <FiSearch size={20} />
               </button>
+              
+              
             </div>
             {searchTerm && showSuggestions &&(
               <ul className="absolute z-10 bg-white w-full mt-1 rounded-md shadow-lg max-h-60 overflow-auto">

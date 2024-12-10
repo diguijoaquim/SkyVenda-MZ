@@ -33,7 +33,7 @@ export function ModernCard({ product }) {
     <Card className="group h-[400px] flex flex-col overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
       <div className="relative h-60">
         <img
-          src={'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80'}
+          src={`https://skyvendamz.up.railway.app/produto/${product.thumb}`}
           alt={product.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
