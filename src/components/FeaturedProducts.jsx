@@ -6,7 +6,7 @@ import adsData from '../data/ads.json';
 import Skeleton from './Skeleton';
 import { useContext } from 'react';
 import { HomeContext } from '../context/HomeContext';
-import ProgressRing from './loaders/ProgressRingtailwindcss';
+import ModernCardSkeleton from './skeleton/ModernCardSkeleton'
 import { AuthContext } from '../context/AuthContext';
 import api from '../api/api_fecher';
 import { ModernCard } from './cards/ModernCard';
@@ -125,10 +125,13 @@ function FeaturedProducts() {
         )}
       </div>
       {loadingMore && (
-        <div className="flex justify-center items-center p-4">
-          <ProgressRing />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
+        {[...Array(4)].map((_, index) => (
+          <ModernCardSkeleton key={index} />
+        ))}
         </div>
       )}
+
       {!hasMore && produtos?.length > 0 && (
         <div className="text-center mt-8 text-gray-600">
           Não há mais produtos para carregar
