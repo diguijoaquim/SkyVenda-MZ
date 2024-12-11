@@ -163,7 +163,7 @@ function CommentsModal({ isOpen, onClose, user, avatar, commentarios,slug }) {
         id: comments.length + 1,
         user: {
           name: user,
-          avatar: `https://skyvendamz.up.railway.app/perfil/${avatar}`,
+          avatar: `${avatar}`,
         },
         text: newComment,
         date: "agora",
