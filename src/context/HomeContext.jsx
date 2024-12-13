@@ -13,6 +13,7 @@ const HomeProvider = ({ children }) => {
   const [produtos, setProdutos] = useState([]);
   const [user_id, setUserID] = useState(localStorage.getItem('user_id') || 0);
   const { setIsLoading } = useLoading();
+  const [firstTime, setFirstTime] = useState(true);
 
   const LoadData = useCallback(async () => {
     try {
@@ -60,7 +61,9 @@ const HomeProvider = ({ children }) => {
         startLoading, 
         stopLoading, 
         produtos, 
-        setProdutos 
+        setProdutos,
+        firstTime, 
+        setFirstTime 
       }}
     >
       {children}

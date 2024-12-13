@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiShoppingCart, FiSearch, FiHome, FiMessageSquare, FiBell, FiMenu, FiUser, FiSettings, FiHelpCircle, FiLogOut, FiGrid, FiEdit3 } from 'react-icons/fi';
+import {FiPlus, FiShoppingCart, FiSearch, FiHome, FiMessageSquare, FiBell, FiMenu, FiUser, FiSettings, FiHelpCircle, FiLogOut, FiGrid, FiEdit3 } from 'react-icons/fi';
 import Cart from './Cart';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
@@ -10,6 +10,7 @@ import PopupMenuMobile from './popupmenu/popup_menu_mobile';
 import { suggestedProducts } from '../data/sugest';
 import { Notifications } from './popupmenu/notifications';
 import SearchCard from './popupmenu/searchCard';
+import PublishProductCard from './PublishProduct';
 
 
 function Header() {
@@ -20,6 +21,7 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showSearchCard, setShowSearchCard] = useState(false);
+  const [showPostDialog,setShowPostDialog]= useState(false);
   
   const [isNotificationOpen,setIsNotificationOpen] = useState(false);
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ function Header() {
   const {user,isAuthenticated,logout}=useContext(AuthContext)
   const NotificationRef = useRef(null);
   const SearchcardRef = useRef(null);
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -150,6 +153,12 @@ function Header() {
             )}
           </div>
           <div className="flex items-center space-x-6">
+            <button onClick={() => setShowPostDialog(true)} className="text-gray-600 flex gap-2
+             bg-orange-100 hover:bg-orange-200 px-3 py-2 rounded-full hover:text-gray-800">
+              <FiPlus size={24} className='font-bold'/>
+              <span>postar</span>
+            </button>
+            
             <div className='hover:bg-indigo-200 w-[40px] h-[40px] rounded-full flex items-center justify-center'>
             <button onClick={() => hangleNotification()} className="text-gray-600 hover:text-blue-600 relative">
               <FiBell size={24} />
@@ -319,6 +328,11 @@ function Header() {
       </div>
 
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        {/* Publish Product Card */}
+      <PublishProductCard 
+        isOpen={showPostDialog}
+        onClose={() => setShowPostDialog(false)}
+      />
     </header>
   );
 }

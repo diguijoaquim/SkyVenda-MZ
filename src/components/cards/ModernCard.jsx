@@ -6,6 +6,10 @@ import { cn } from '../../lib/utils';
 import { Button } from '../ui/button';
 import { useToast } from '../../hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import api from '../../api/api_fecher';
+
 
 
 export function ModernCard({ product }) {
@@ -13,13 +17,21 @@ export function ModernCard({ product }) {
   const [likesCount, setLikesCount] = useState(product.likes);
   const { toast } = useToast();
   const navigate=useNavigate()
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleLike = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (isAuthenticated) {
+      setIsLiked((prev) => !prev);
+      setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+      api.post(`/produtos/${product.slug}/like`);
+    } else {
+      navigate('/login');
+      return
+    }
 
-    setIsLiked((prev) => !prev);
-    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+    
 
     if (!isLiked) {
       toast({
@@ -30,8 +42,9 @@ export function ModernCard({ product }) {
   }, [isLiked, toast]);
 
   return (
-    <Card className="group h-[400px] flex flex-col overflow-hidden rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
-      <div className="relative h-60">
+    <Card className="group h-[400px] flex flex-col overflow-hidden rounded-xl 
+    transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+      <div className="relative h-60" onClick={()=>navigate(`/post/${product.slug}`)}>
         <img
           src={`https://skyvendamz.up.railway.app/produto/${product.thumb}`}
           alt={product.title}

@@ -91,7 +91,7 @@ function PropertyHeader({ property }) {
       </div>
       <div className="text-right">
         <p className="text-3xl font-bold text-blue-600">{formatPrice(property?.price)}</p>
-        <p className="text-gray-500 text-sm">Posted {property?.time}</p>
+        <p className="text-gray-500 text-sm">Postado {property?.time}</p>
       </div>
     </div>
   );
