@@ -9,6 +9,8 @@ import ReactQuill from 'react-quill';
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import { useToast } from "../hooks/use-toast"
+import { ToastAction } from "../components/ui/toast"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { PROVINCIAS,DISTRITOS,CATEGORIES,SUBCATEGORIES } from '../data/consts';
 
@@ -32,6 +34,7 @@ function PublishProductCard({ isOpen, onClose }) {
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
   const { token } = useContext(AuthContext);
+  const { toast } = useToast()
 
 
    // Função para converter base64 para File
@@ -81,11 +84,60 @@ function PublishProductCard({ isOpen, onClose }) {
     })
     .then(response => {
       if (response.status === 200) {
-        console.log('Produto publicado com sucesso!');
+        toast({
+          variant: "success",
+          title: "Sucesso!",
+          description: "Bolada postada com sucesso. 🚀",
+          action: <ToastAction altText="Fechar">Fechar</ToastAction>,
+      });
       }
     })
     .catch(error => {
-      console.log(error.message);
+      console.log(error.status);
+      if (error.status === 401) {
+        toast({
+            variant: "destructive",
+            title: "Ops! Algo deu errado.",
+            description: "Parece que você precisa fazer login para continuar.",
+            action: <ToastAction altText="Fazer login">Fazer login</ToastAction>,
+        });
+    } else if (error.status === 403) {
+        toast({
+            variant: "destructive",
+            title: "Acesso negado.",
+            description: "Você não tem permissão para acessar este recurso.",
+            action: <ToastAction altText="Contatar suporte">Contatar suporte</ToastAction>,
+        });
+    } else if (error.status === 402) {
+        toast({
+            variant: "destructive",
+            title: "Saldo insuficiente.",
+            description: "Seu saldo é insuficiente para completar esta operação.",
+            action: <ToastAction altText="Adicionar fundos">Adicionar fundos</ToastAction>,
+        });
+    } else if (error.status === 422) {
+        toast({
+            variant: "destructive",
+            title: "Dados inválidos.",
+            description: "Os dados enviados estão incorretos ou incompletos. Por favor, revise e tente novamente.",
+            action: <ToastAction altText="Corrigir dados">Corrigir dados</ToastAction>,
+        });
+    } else if (error.status === 500) {
+        toast({
+            variant: "destructive",
+            title: "Erro no servidor.",
+            description: "Ocorreu um problema no servidor. Por favor, tente novamente mais tarde.",
+            action: <ToastAction altText="Tentar novamente">Tentar novamente</ToastAction>,
+        });
+    } else {
+        toast({
+            variant: "destructive",
+            title: "Erro desconhecido.",
+            description: "Ocorreu um erro inesperado. Por favor, tente novamente.",
+            action: <ToastAction altText="Tentar novamente">Tentar novamente</ToastAction>,
+        });
+    }
+    
     })
     .finally(() => {
       setLoading(false);

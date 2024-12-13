@@ -15,6 +15,7 @@ import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
 import { AuthProvider } from './context/AuthContext';
 import { LoadingProvider } from './context/LoadingContext';
+import { Toaster as Toasters  } from "./components/ui/toaster"
 import PrivateRoute from './pages/Auth/PrivateRoute';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
@@ -48,6 +49,7 @@ function App() {
         <div className="relative min-h-screen">
           <AnimatedBackground />
           <Toaster position="top-right" />
+          <Toasters/>
           <AuthProvider>
             <HomeProvider>
               <Suspense fallback={<FullScreenLoader />}>
@@ -115,7 +117,9 @@ function App() {
               </Suspense>
             </HomeProvider>
           </AuthProvider>
+          <Toaster />
         </div>
+
       </LoadingProvider>
       
     </Router>
