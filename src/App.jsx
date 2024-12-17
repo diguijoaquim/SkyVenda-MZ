@@ -117,7 +117,6 @@ function App() {
               </Suspense>
             </HomeProvider>
           </AuthProvider>
-          <Toaster />
         </div>
 
       </LoadingProvider>

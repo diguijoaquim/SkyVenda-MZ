@@ -154,7 +154,7 @@ function Header() {
           </div>
           <div className="flex items-center space-x-6">
             <button onClick={() => setShowPostDialog(true)} className="text-gray-600 flex gap-2
-             bg-orange-100 hover:bg-orange-200 px-3 py-2 rounded-full hover:text-gray-800">
+             bg-orange-200 hover:bg-orange-100 px-3 py-2 rounded-full hover:text-gray-800">
               <FiPlus size={24} className='font-bold'/>
               <span>postar</span>
             </button>

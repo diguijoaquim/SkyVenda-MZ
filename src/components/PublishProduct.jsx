@@ -206,7 +206,7 @@ function PublishProductCard({ isOpen, onClose }) {
           >
             <div className="bg-white  shadow-2xl ">
               {/* Header */}
-              <div className=" p-4 sticky top-0 z-10 bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 border-b
+              <div className=" p-3.5 sticky top-0 z-10 bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 border-b
               ">
                 <div className="flex justify-between items-center ">
                   <h2 className="text-2xl font-bold text-gray-500">Novo produto</h2>
@@ -221,7 +221,7 @@ function PublishProductCard({ isOpen, onClose }) {
 
               {/* Scrollable Content */}
               <div className="overflow-y-auto max-h-[calc(90vh-8rem)] custom-scrollbar">
-                <div className="p-6 space-y-6">
+                <div className="p-4 space-y-6">
                   {/* Image Upload Area */}
                   <div className="space-y-4">
                     {/* Image Preview Grid */}
@@ -286,7 +286,7 @@ function PublishProductCard({ isOpen, onClose }) {
                   </div>
 
                   {/* Form Fields */}
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Nome do Produto
@@ -481,10 +481,10 @@ function PublishProductCard({ isOpen, onClose }) {
          </div>
 
               {/* Footer */}
-              <div className="bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 px-6 py-4 flex justify-end space-x-4 sticky bottom-0 z-10">
+              <div className="bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 px-6 py-3 flex justify-end space-x-4 sticky bottom-0 z-10">
                 <button
                   onClick={onClose}
-                  className="px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors"
+                  className="px- py-2 text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   Cancelar
                 </button>
