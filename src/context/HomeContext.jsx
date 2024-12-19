@@ -18,7 +18,7 @@ const HomeProvider = ({ children }) => {
     try {
       setIsLoading(true);
       // Simulate longer loading time for better UX
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 5000));
 
       const response = await api.get(`/produtos/?user_id=${user_id}&limit=1&offset=0`);
       setProdutos(response.data);

@@ -16,10 +16,12 @@ const PromotionalBanners = lazy(() =>
 );
 
 export default function HomePage() {
-  const { loading, stopLoading } = useContext(HomeContext);
+  const { loading, stopLoading,produtos } = useContext(HomeContext);
 
   useEffect(() => {
-    stopLoading();
+    if(produtos){
+      stopLoading();
+    }
   }, [stopLoading]);
 
   return (

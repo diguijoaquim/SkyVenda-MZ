@@ -9,11 +9,13 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
+
   const { signup, loading } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(email, password, name);
+    await signup(name, email, username, password);
   };
 
   return (
@@ -50,6 +52,19 @@ function Signup() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Email"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="relative">
+                <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="username"
+                  required
+                  value={username}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Nome do Usuario"
                 />
               </div>
             </div>

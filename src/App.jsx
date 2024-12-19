@@ -28,6 +28,7 @@ import { useAuth } from './context/AuthContext';
 import RecoveryPasseword from './pages/Auth/RecoveryPasseword';
 import HomeLayout from './layout/Homelayout';
 import PageNotFound from './pages/404';
+import Teste from './pages/teste';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -40,8 +41,6 @@ const RouteTracker = ({ setCurrentRoute }) => {
 };
 
 function App() {
-  const [currentRoute, setCurrentRoute] = React.useState('/');
-  
 
   return (
     <Router>
@@ -55,6 +54,7 @@ function App() {
               <Suspense fallback={<FullScreenLoader />}>
               <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/teste" element={<Teste />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/recovery-password" element={<RecoveryPasseword />} />
 
@@ -94,6 +94,10 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
+                  <Route path="/pedidos" element={<HomeLayout><h1>Pedidos</h1></HomeLayout>} />
+                  <Route path="/produtos" element={<HomeLayout><h1>Meus produtos</h1></HomeLayout>} />
+                  <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
+                  <Route path="/nhonguistas" element={<HomeLayout><h1>melhores nhonguistas boladas seguras</h1></HomeLayout>} />
                   
                   {/* Protected Routes */}
                   <Route
