@@ -125,13 +125,13 @@ export function Sidebar() {
     )}>
       <div className="flex flex-col h-full">
         {/* Enhanced User Profile */}
-        {isAuthenticated ? (
+        {isAuthenticated && user ? (
           <div className="p-2 mb-2">
           <div className="relative flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
             <div className="relative">
               <Avatar className="h-10 w-10 ring-2 ring-white">
                 <AvatarImage 
-                  src={user?.perfil || "https://github.com/shadcn.png"} 
+                  src={`https://skyvendamz.up.railway.app/perfil/${user.perfil}` || "https://github.com/shadcn.png"} 
                   alt={user?.nome || "User"} 
                 />
                 <AvatarFallback>
