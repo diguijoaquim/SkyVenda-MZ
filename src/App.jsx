@@ -30,6 +30,7 @@ import HomeLayout from './layout/Homelayout';
 import PageNotFound from './pages/404';
 import Teste from './pages/teste';
 import { SellersGrid } from './components/cards/sellergrid';
+import { ProductGrid } from './components/cards/productGrid';
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
 
@@ -95,7 +96,7 @@ function App() {
                   <Route path="/search" element={<Search />} />
                   <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
                   <Route path="/pedidos" element={<HomeLayout><h1>Pedidos</h1></HomeLayout>} />
-                  <Route path="/produtos" element={<HomeLayout><h1>Meus produtos</h1></HomeLayout>} />
+                  <Route path="/produtos" element={<HomeLayout><div className="p-4 "><ProductGrid/></div></HomeLayout>} />
                   <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
                   <Route path="/nhonguistas" element={<HomeLayout><SellersGrid/></HomeLayout>} />
                   

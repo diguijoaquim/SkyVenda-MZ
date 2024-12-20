@@ -1,8 +1,7 @@
 import React,{useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header1";
-import { Sidebar } from "./Sidebar";
-import HomePage from "../pages/Home";
+import { Sidebar } from "../components/sidebars/mainsidebar";
 import Profile from "../pages/Profile";
 export default function HomeLayout({children =<Profile/>}) {
   const {user, isAuthenticated, logout} = useContext(AuthContext);

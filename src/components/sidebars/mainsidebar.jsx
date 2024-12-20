@@ -1,10 +1,10 @@
 import React from 'react';
 import { Store, Home, Package, Users, Settings, LogOut, BarChart2 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { cn } from '../lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
-import { AuthContext } from '../context/AuthContext';
-import { useAuth } from '../context/AuthContext';
+import { cn } from '../../lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar';
+import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useContext } from 'react';
 
 const mainNavItems = [

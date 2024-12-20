@@ -24,7 +24,7 @@ export function SellerCard({ seller }) {
   };
 
   return (
-    <Card className="w-full max-w-sm transition-all hover:shadow-lg">
+    <Card className="w-full max-w-sm transition-all hover:shadow-lg bg-white/50">
       <CardHeader className="flex flex-row items-center gap-4">
         <Avatar className="h-16 w-16">
           <AvatarImage src={seller.avatar} alt={seller.name} />
