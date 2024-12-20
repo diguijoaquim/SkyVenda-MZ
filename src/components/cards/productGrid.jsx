@@ -1,106 +1,73 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { ProductCard } from './ProductCard';
 import { ProductCardSkeleton2 } from '../skeleton/productcardskeleton2';
-
-const initialProducts = [
-  {
-    id: '1',
-    title: 'Smartphone Galaxy S21',
-    thumbnail: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500',
-    price: 3499.99,
-    views: 1200,
-    likes: 45,
-    comments: 12,
-    status: 'published',
-    createdAt: '2024-01-19T14:30:00Z'
-  },
-  {
-    id: '2',
-    title: 'Notebook Dell XPS 13',
-    thumbnail: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=500',
-    price: 6799.99,
-    views: 890,
-    likes: 32,
-    comments: 8,
-    status: 'published',
-    createdAt: '2024-01-18T10:15:00Z'
-  },
-  {
-    id: '3',
-    title: 'Apple Watch Series 7',
-    thumbnail: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500',
-    price: 2499.99,
-    views: 650,
-    likes: 28,
-    comments: 5,
-    status: 'draft',
-    createdAt: '2024-01-17T16:45:00Z'
-  },
-  {
-    id: '4',
-    title: 'Apple Watch Series 7',
-    thumbnail: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500',
-    price: 2499.99,
-    views: 650,
-    likes: 28,
-    comments: 5,
-    status: 'draft',
-    createdAt: '2024-01-17T16:45:00Z'
-  },
-  {
-    id: '5',
-    title: 'Apple Watch Series 7',
-    thumbnail: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500',
-    price: 2499.99,
-    views: 650,
-    likes: 28,
-    comments: 5,
-    status: 'draft',
-    createdAt: '2024-01-17T16:45:00Z'
-  }
-];
+import { AuthContext } from '../../context/AuthContext';
+import { HomeContext } from '../../context/HomeContext';
+import api from '../../api/api_fecher';
 
 export function ProductGrid() {
-  const [products, setProducts] = useState(initialProducts);
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true);
+  const { myproducts, addProducts } = useContext(HomeContext);
+  const { isAuthenticated, token } = useContext(AuthContext);
+  const [products, setProducts] = useState([]); // Inicializado como array vazio
 
   const handleEdit = (id) => {
     console.log('Edit product:', id);
   };
 
   const handleDelete = (id) => {
-    setProducts(products.filter(product => product.id !== id));
+    const updatedProducts = products.filter((product) => product.id !== id);
+    setProducts(updatedProducts); // Atualiza os produtos no contexto
+    console.log('Deleted product:', id);
   };
-  useEffect(()=>{
-    setTimeout(() => {
-        setLoading(false)
-    }, 3000);
-  },[])
+
+  useEffect(() => {
+    api
+      .get('/produtos/produtos/?skip=0&limit=10', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // Certifica-se de que res.data é um array antes de definir o estado
+        setProducts(res.data.produtos);
+        console.log('Produtos recebidos:', res.data);
+      })
+      .catch((err) => {
+        console.error('Erro ao buscar produtos:', err);
+        setProducts([]); // Define como array vazio em caso de erro
+      })
+      .finally(() => setLoading(false));
+  }, [token]);
 
   return (
-    <div className="bg-white rounded-lg shadow h-[calc(100vh-100px)] ">
+    <div className="bg-white rounded-lg shadow h-[calc(100vh-100px)]">
       <div className="p-4 border-b">
         <h2 className="text-lg font-semibold text-gray-900">Meus Produtos</h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 ">
-      {loading ? (
-        
-        <>
-        {[...Array(4)].map((_, index) => (
-                  <ProductCardSkeleton2 key={index}/>
-                ))}</>
-    ):(
-        <>
-        {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}</>
-    )}
-        
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {loading ? (
+          <>
+            {[...Array(4)].map((_, index) => (
+              <ProductCardSkeleton2 key={index} />
+            ))}
+          </>
+        ) : (
+          <>
+            {products.length === 0 ? (
+              <p>Nenhum produto encontrado</p>
+            ) : (
+              products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onEdit={handleEdit}
+                  onDelete={() => handleDelete(product.id)}
+                />
+              ))
+            )}
+          </>
+        )}
       </div>
     </div>
   );

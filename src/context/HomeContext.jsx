@@ -12,14 +12,14 @@ const HomeProvider = ({ children }) => {
   const [user_id, setUserID] = useState(localStorage.getItem('user_id') || 0);
   const { setIsLoading } = useLoading();
   const [firstTime, setFirstTime] = useState(true);
+  const [myproducts,setMyProducts] = useState([]);
 
   // Função para carregar os dados iniciais
   const LoadData = useCallback(async () => {
     try {
       setIsLoading(true);
       // Simulate longer loading time for better UX
-      await new Promise(resolve => setTimeout(resolve, 5000));
-
+      await new Promise(resolve => setTimeout(resolve, 2000));
       const response = await api.get(`/produtos/?user_id=${user_id}&limit=1&offset=0`);
       setProdutos(response.data);
       console.log(response.data);
@@ -38,6 +38,7 @@ const HomeProvider = ({ children }) => {
     setLoading(true);
     setIsLoading(true);
   }, [setIsLoading]);
+  const addProducts=(products)=>setMyProducts(products)
 
   const stopLoading = useCallback(() => {
     setTimeout(() => {
@@ -85,7 +86,9 @@ const HomeProvider = ({ children }) => {
         setProdutos,
         firstTime,
         setFirstTime,
-        addOrUpdateProduto, // Disponibilizando a função no contexto
+        addOrUpdateProduto,
+        myproducts,
+        addProducts
       }}
     >
       {children}

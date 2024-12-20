@@ -31,10 +31,11 @@ export function ProductCard({ product, onEdit, onDelete }) {
       >
         <div className="relative w-1/3 shrink-0">
           <div className="h-full overflow-hidden">
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+          <img
+            src={`https://skyvendamz.up.railway.app/produto/${product.thumb}`}
+            onError={(e) => e.target.src = 'imagem.jpg'}
+            alt={product.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
             />
           </div>
           {product.views > 1000 && (
@@ -115,7 +116,7 @@ export function ProductCard({ product, onEdit, onDelete }) {
   
           <div className="flex items-center gap-1 text-xs text-gray-500 truncate">
             <Clock className="w-3 h-3" />
-            <span>Publicado em {formattedDate}</span>
+            <span>Publicado a {product.time}</span>
           </div>
         </div>
       </div>
