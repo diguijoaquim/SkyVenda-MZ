@@ -4,7 +4,7 @@ import Header from "../components/Header1";
 import { Sidebar } from "../components/sidebars/mainsidebar";
 import Profile from "../pages/Profile";
 export default function HomeLayout({children =<Profile/>}) {
-  const {user, isAuthenticated, logout} = useContext(AuthContext);
+  
   const [offline,setOffline]=useState(false)
   useEffect(()=>{
     window.addEventListener('offline', setOffline(true));

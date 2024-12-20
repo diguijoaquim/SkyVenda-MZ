@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
           if(error.message=="Network Error"){
             toast.error("Verifique a sua ligação");
-          } else if(error.status === 401) {
+          } else if(error.status == 401) {
             logout(); 
           } else {
             toast.error("Erro desconhecido");
