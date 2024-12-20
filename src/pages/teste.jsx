@@ -13,7 +13,7 @@ export default function Teste() {
 
         <button className="bg-indigo-400 rounded-md py-2 px-3 border
          hover:bg-indigo-600 text-black hover:text-white" onClick={()=>setAlert(true)}>OpenDialog</button>
-         
+        
    </div>
    
  );

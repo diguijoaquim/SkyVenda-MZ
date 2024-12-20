@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Eye, Heart, MessageCircle, MoreVertical, Pencil, Trash2, Clock, CheckCircle2, Sparkles } from 'lucide-react';
+import { Eye, Heart, MoreVertical, Pencil,Earth,MessageCircle, Trash2, Clock, CheckCircle2, Sparkles } from 'lucide-react';
 import { Button } from '../ui/button';
+import ConfirmDelete from '../Dialogs/AlertDelete';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,11 +19,17 @@ function formatNumber(num) {
   return num.toString();
 }
 export function ProductCard({ product, onEdit, onDelete }) {
-    const formattedDate = new Date(product.createdAt).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    });
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+
+
+
+    
+      const handleCloseDialog = () => {
+        setIsDialogOpen(false); // Fecha o diálogo
+        setSelectedProduct(null);
+      };
   
     return (
       <div
@@ -88,12 +95,19 @@ export function ProductCard({ product, onEdit, onDelete }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem onClick={() => onEdit(product.id)} className="gap-2">
+                <DropdownMenuItem onClick={() => onEdit(product)} className="gap-2">
                   <Pencil className="w-4 h-4" />
                   Editar
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onEdit(product)} className="gap-2">
+                  <Earth className="w-4 h-4" />
+                  Turbinar a Boldada
+                </DropdownMenuItem>
                 <DropdownMenuItem 
-                  onClick={() => onDelete(product.id)}
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setIsDialogOpen(true)}
+                }
                   className="text-red-600 gap-2"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -112,13 +126,25 @@ export function ProductCard({ product, onEdit, onDelete }) {
               <Heart className="w-3 h-3" />
               {formatNumber(product.likes)}
             </span>
+            <span className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-full">
+              <MessageCircle className="w-3 h-3" />
+              {product?.comments?.length || 0}
+            </span>
           </div>
-  
+          
           <div className="flex items-center gap-1 text-xs text-gray-500 truncate">
             <Clock className="w-3 h-3" />
             <span>Publicado a {product.time}</span>
           </div>
         </div>
+    
+        <ConfirmDelete
+            isOpen={isDialogOpen}
+            onClose={handleCloseDialog}
+            product={selectedProduct}
+            onDelete={onDelete}
+            
+      />
       </div>
     );
   }

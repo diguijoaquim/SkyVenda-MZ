@@ -111,6 +111,7 @@ export default function ProductPage() {
               <div className="flex items-center gap-4">
                 <img
                   src={`https://skyvendamz.up.railway.app/perfil/${product?.user?.avatar}`}
+                  onError={(e) => e.target.src = 'imagem.jpg'}
                   alt={product?.user?.name}
                   className="w-16 h-16 rounded-full object-cover"
                 />

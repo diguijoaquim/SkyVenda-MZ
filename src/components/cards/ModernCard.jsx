@@ -35,9 +35,8 @@ export function ModernCard({ product }) {
 
     if (!isLiked) {
       toast({
-        title: "Adicionado aos favoritos",
-        description: "Este imóvel foi adicionado à sua lista de favoritos."
-      });
+        title: "Gostou 😊",
+        description: `Voce gostou - ${product.title} `});
     }
   }, [isLiked, toast]);
 
@@ -47,6 +46,7 @@ export function ModernCard({ product }) {
       <div className="relative h-60" onClick={()=>navigate(`/post/${product.slug}`)}>
         <img
           src={`https://skyvendamz.up.railway.app/produto/${product.thumb}`}
+          onError={(e) => e.target.src = 'imagem.jpg'}
           alt={product.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
