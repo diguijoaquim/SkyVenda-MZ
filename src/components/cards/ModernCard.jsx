@@ -17,15 +17,24 @@ export function ModernCard({ product }) {
   const [likesCount, setLikesCount] = useState(product.likes);
   const { toast } = useToast();
   const navigate=useNavigate()
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated,token } = useContext(AuthContext);
 
   const handleLike = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log(token)
     if (isAuthenticated) {
       setIsLiked((prev) => !prev);
       setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
-      api.post(`/produtos/${product.slug}/like`);
+      api.post(`/produtos/${product.slug}/like`,{},
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+        }
+      );
     } else {
       navigate('/login');
       return
