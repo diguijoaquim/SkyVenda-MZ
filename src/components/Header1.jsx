@@ -11,6 +11,7 @@ import { suggestedProducts } from '../data/sugest';
 import { Notifications } from './popupmenu/notifications';
 import SearchCard from './popupmenu/searchCard';
 import PublishProductCard from './PublishProduct';
+import { CandyButton } from './buttons/CandyButtons';
 
 
 function Header() {
@@ -153,11 +154,12 @@ function Header() {
             )}
           </div>
           <div className="flex items-center space-x-6">
-            <button onClick={() => setShowPostDialog(true)} className="text-gray-600 flex gap-2
+            <CandyButton/>
+            {/* <button onClick={() => setShowPostDialog(true)} className="text-gray-600 flex gap-2
              bg-orange-100 hover:bg-orange-200 px-3 py-2 rounded-full hover:text-gray-800">
               <FiPlus size={24} className='font-bold'/>
               <span>postar</span>
-            </button>
+            </button> */}
             
             <div className='hover:bg-indigo-200 w-[40px] h-[40px] rounded-full flex items-center justify-center'>
             <button onClick={() => hangleNotification()} className="text-gray-600 hover:text-blue-600 relative">
