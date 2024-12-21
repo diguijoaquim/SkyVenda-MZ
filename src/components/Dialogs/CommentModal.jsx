@@ -25,7 +25,7 @@ export default function CommentsModal({ isOpen, onClose, product, add }) {
             formData.append('produto_slug', product.slug); 
             formData.append('conteudo', newComment);
 
-            const response = await api.post(
+            await api.post(
                 '/comentarios/',
                 formData,
                 {
@@ -42,7 +42,7 @@ export default function CommentsModal({ isOpen, onClose, product, add }) {
                 id: comments.length + 1,
                 user: {
                     name: product.user?.name,
-                    avatar: product.user?.perfil,
+                    avatar: product.user?.avatar,
                 },
                 text: newComment,
                 date: "agora",

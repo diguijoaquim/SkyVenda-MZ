@@ -32,8 +32,6 @@ export function ProductGrid() {
   const [category, setCategory] = useState('');
   const [stock, setStock] = useState('');
   const [estado, setEstado] = useState('');
-  const [province, setProvince] = useState('');
-  const [district, setDistrict] = useState('');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [content, setContent] = useState('');
@@ -48,10 +46,8 @@ export function ProductGrid() {
       setProductName(selectedProduct.title || '');
       setPrice(selectedProduct.price || '');
       setCategory(selectedProduct.category || '');
-      setStock(selectedProduct.stock || '');
+      setStock(selectedProduct.stock || 0);
       setEstado(selectedProduct.estado || '');
-      setProvince(selectedProduct.province || '');
-      setDistrict(selectedProduct.district || '');
       setType(selectedProduct.type || '');
       setDescription(selectedProduct.description || '');
       setContent(selectedProduct.content || '');
@@ -102,8 +98,7 @@ export function ProductGrid() {
   useEffect(() => {
     if (!token) return;
 
-    api
-      .get('/produtos/produtos/?skip=0&limit=10', {
+    api.get(`produtos/produtos/?skip=0&limit=10`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -119,20 +114,42 @@ export function ProductGrid() {
   }, [token]);
 
   const handleSubmit = async () => {
-    try {
-      // Add your update logic here
+    
+    const formData = new FormData();
+    formData.append('nome', productName);
+    formData.append('preco', parseFloat(price));
+    formData.append('quantidade_estoque', parseInt(stock));
+    formData.append('estado', estado);
+    formData.append('disponiblidade', 'string');
+    formData.append('descricao', description);
+    formData.append('detalhes', content);
+    formData.append('tipo', type);
+    formData.append('categoria', category);
+    
+    
+    
+    
+
+    api.put(`/produtos/${selectedProduct?.slug}`,formData,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => {
       toast({
         title: "Produto atualizado com sucesso!",
         description: "As alterações foram salvas.",
       });
-      setPage(1);
-    } catch (error) {
+    }).catch(err => {
       toast({
         title: "Erro ao atualizar produto",
         description: "Tente novamente mais tarde.",
         variant: "destructive",
       });
-    }
+      setPage(1);
+    })
+
+      
+    
   };
 
   return (
@@ -291,47 +308,6 @@ export function ProductGrid() {
                       </SelectContent>
                     </Select>
                   </div>
-
-                  {/* Província */}
-                  <div>
-                    <Label htmlFor="province">Província</Label>
-                    <Select
-                      value={province}
-                      onValueChange={(value) => setProvince(value)}
-                    >
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Selecione uma província" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {PROVINCIAS.map((prov) => (
-                          <SelectItem key={prov} value={prov}>
-                            {prov}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Distrito */}
-                  <div>
-                    <Label htmlFor="district">Distrito</Label>
-                    <Select
-                      value={district}
-                      onValueChange={(value) => setDistrict(value)}
-                    >
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Selecione um distrito" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {province && DISTRITOS[province]?.map((dist) => (
-                          <SelectItem key={dist} value={dist}>
-                            {dist}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
                   {/* Detalhes - Rich Text Editor */}
                   <div>
                     <Label htmlFor="content">Detalhes</Label>
@@ -359,11 +335,11 @@ export function ProductGrid() {
                   </div>
                 </div>
 
-                <div className=" bg-white p-4 border-t w-[500px]">
+                <div className=" bg-white p-4 border-t w-[500px] flex justify-center items-center flex-col gap-2">
                   <Button onClick={handleSubmit} className="w-full">
                     Salvar Alterações
                   </Button>
-                  <div className="w-[266px] h-[350px] rounded-md bg-white/30 border-blue-200 shadow-md p-4 space-y-2 overflow-y-auto">
+                  <div className="w-w-full h-[350px] rounded-md bg-white/30 border-blue-200 shadow-md p-4 space-y-2 overflow-y-auto">
                       <label className="text-black">Melhores Boladas</label>
                       {sideAds.map((item, index) => (
                         <div
