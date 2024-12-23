@@ -14,17 +14,14 @@ export default function HomeLayout({children =<Profile/>}) {
   },[])
     
  return (
-   <div>
-
-      
-      
+   <div>      
       <div className="md:flex">
         <div className="hidden md:block">
         <Sidebar/>
         </div>
-        <div className="h-[100vh] overflow-y-auto w-[100%]" > 
-          
+        <div className="h-[100vh]  w-[100%]" >   
         <Header/>
+        <div className="h-[100vh] w-full overflow-y-auto">
         <div className="p-4 flex gap-3">
         <CategoriesDropdown/>
 
@@ -36,8 +33,8 @@ export default function HomeLayout({children =<Profile/>}) {
           <label className="font-extrabold text-gray-600">Da Sua Provincia</label>
         </div>
         </div>
-        
         {children}
+        </div>
         </div>
       </div>
    </div>
