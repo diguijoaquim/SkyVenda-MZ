@@ -90,7 +90,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-gradient-to-r backdrop:blur-md from-pink-50 to-red-50 shadow-sm sticky top-0 z-50 ">
+    <header className=" shadow-sm sticky top-0 z-50 ">
       <div className="container mx-auto px-4">
       {showSearchCard && (<div ref={SearchcardRef}> 
         <SearchCard />

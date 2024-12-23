@@ -1,26 +1,23 @@
 import { useEffect, useState, useContext } from 'react';
-import { ProductCard } from './ProductCard';
+import { ProductCard } from '../cards/ProductCard';
 import { ProductCardSkeleton2 } from '../skeleton/productcardskeleton2';
 import { AuthContext } from '../../context/AuthContext';
 import { HomeContext } from '../../context/HomeContext';
 import api from '../../api/api_fecher';
 import { FaArrowLeft } from 'react-icons/fa';
-import { FiX, FiUpload, FiDollarSign, FiBarChart2, FiBox, FiTag, FiImage, FiGitPullRequest } from 'react-icons/fi';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { useToast } from "../../hooks/use-toast";
-import { ToastAction } from "../../components/ui/toast";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
-import { PROVINCIAS, DISTRITOS, CATEGORIES, SUBCATEGORIES } from '../../data/consts';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { CATEGORIES, SUBCATEGORIES } from '../../data/consts';
 
 export function ProductGrid() {
   const [loading, setLoading] = useState(true);
   const { myproducts, addProducts } = useContext(HomeContext);
   const { isAuthenticated, token } = useContext(AuthContext);
-  const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [images, setImages] = useState([]);
@@ -83,8 +80,8 @@ export function ProductGrid() {
         Authorization: `Bearer ${token}`
       }
     }).then((res)=>{
-      const updatedProducts = products.filter((product) => product.slug !== slug);
-      setProducts(updatedProducts);
+      const updatedProducts = myproducts.filter((product) => product.slug !== slug);
+      addProducts(updatedProducts);
       toast({
         title: "Produto deletado!",
         description: `O produto,${name}, for eliminado com sucesso,`,
@@ -96,21 +93,26 @@ export function ProductGrid() {
   };
 
   useEffect(() => {
-    if (!token) return;
-
-    api.get(`produtos/produtos/?skip=0&limit=10`, {
+    if (!token && myproducts) return;
+    if(myproducts?.length>=1){
+      setLoading(false)
+    }else{
+      api.get(`produtos/produtos/?skip=0&limit=10`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        setProducts(Array.isArray(res.data.produtos) ? res.data.produtos : []);
+        addProducts(Array.isArray(res.data.produtos) ? res.data.produtos : []);
       })
       .catch((err) => {
         console.error('Erro ao buscar produtos:', err);
-        setProducts([]);
+        addProducts([]);
       })
       .finally(() => setLoading(false));
+    }
+
+    
   }, [token]);
 
   const handleSubmit = async () => {
@@ -168,10 +170,10 @@ export function ProductGrid() {
               </>
             ) : (
               <>
-                {products.length === 0 ? (
+                {myproducts.length === 0 ? (
                   <p>Nenhum produto encontrado</p>
                 ) : (
-                  products.map((product) => (
+                  myproducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}

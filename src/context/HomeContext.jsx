@@ -13,6 +13,7 @@ const HomeProvider = ({ children }) => {
   const { setIsLoading } = useLoading();
   const [firstTime, setFirstTime] = useState(true);
   const [myproducts,setMyProducts] = useState([]);
+  const [sellers,setSellers] = useState([]);
 
   // Função para carregar os dados iniciais
   const LoadData = useCallback(async () => {
@@ -38,7 +39,10 @@ const HomeProvider = ({ children }) => {
     setLoading(true);
     setIsLoading(true);
   }, [setIsLoading]);
+
+  //funcoes que atualiza o estado usando os componentes filhos
   const addProducts=(products)=>setMyProducts(products)
+  const addSellers=(sellers)=>setSellers(sellers)
 
   const stopLoading = useCallback(() => {
     setTimeout(() => {
@@ -88,7 +92,9 @@ const HomeProvider = ({ children }) => {
         setFirstTime,
         addOrUpdateProduto,
         myproducts,
-        addProducts
+        addProducts,
+        sellers,
+        addSellers
       }}
     >
       {children}

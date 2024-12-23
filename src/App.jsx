@@ -9,7 +9,6 @@ import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/dashboard/Dashboard';
 import HomePage from './pages/Home';
 import ProductPage from './pages/ProductPage';
-import AnimatedBackground from './components/AnimatedBackground';
 import HomeProvider from './context/HomeContext';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
@@ -22,15 +21,15 @@ import Profile from './pages/Profile';
 import Form_Perfil from './pages/Profile/form_perfil';
 import FullScreenLoader from './components/loaders/FullScreenLoader';
 import { useEffect } from 'react';
-import DashboardProduct from './pages/dashboard/DashboardProduct';
 import DashboardLayout from './pages/dashboard/DashboardLayout';
-import { useAuth } from './context/AuthContext';
 import RecoveryPasseword from './pages/Auth/RecoveryPasseword';
 import HomeLayout from './layout/Homelayout';
 import PageNotFound from './pages/404';
 import Teste from './pages/teste';
-import { SellersGrid } from './components/cards/sellergrid';
-import { ProductGrid } from './components/cards/productGrid';
+import Sellers from './pages/sellers';
+import MyProducts from './pages/myproducts';
+import SkyBackground from './components/bg';
+
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
 
@@ -47,7 +46,7 @@ function App() {
     <Router>
       <LoadingProvider>
         <div className="relative min-h-screen">
-          <AnimatedBackground />
+        <SkyBackground/>
           <Toaster position="top-right" />
           <Toasters/>
           <AuthProvider>
@@ -96,9 +95,9 @@ function App() {
                   <Route path="/search" element={<Search />} />
                   <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
                   <Route path="/pedidos" element={<HomeLayout><h1>Pedidos</h1></HomeLayout>} />
-                  <Route path="/produtos" element={<HomeLayout><div className="p-4 "><ProductGrid/></div></HomeLayout>} />
+                  <Route path="/produtos" element={<HomeLayout><MyProducts/></HomeLayout>} />
                   <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
-                  <Route path="/nhonguistas" element={<HomeLayout><SellersGrid/></HomeLayout>} />
+                  <Route path="/nhonguistas" element={<HomeLayout><Sellers/></HomeLayout>} />
                   
                   {/* Protected Routes */}
                   <Route
