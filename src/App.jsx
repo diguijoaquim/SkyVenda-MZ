@@ -31,6 +31,7 @@ import MyProducts from './pages/myproducts';
 import SkyBackground from './components/bg';
 import CategoryPage from './pages/CategoryPage';
 import ProductProvince from './pages/firlterByProvince';
+import BestBolada from './pages/bestbolada';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -102,6 +103,8 @@ function App() {
                   <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
                   <Route path="/nhonguistas" element={<HomeLayout><Sellers/></HomeLayout>} />
                   <Route path="/p/:province" element={<HomeLayout><ProductProvince/></HomeLayout>} />
+                  <Route path="/melhores-boladas" element={<HomeLayout><BestBolada/></HomeLayout>} />
+
 
                   
                   {/* Protected Routes */}

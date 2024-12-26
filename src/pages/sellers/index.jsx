@@ -1,5 +1,5 @@
 import React from 'react'
-import { SellersGrid } from '../../components/grids/sellerGrid'
+import { SellersGrid } from './sellergrid'
 
 export default function Sellers() {
   return (

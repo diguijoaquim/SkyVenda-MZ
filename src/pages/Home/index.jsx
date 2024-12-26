@@ -37,10 +37,10 @@ export default function HomePage() {
             <section>
               <div className="p-4 flex gap-3">
             <CategoriesDropdown/>
-
-            <div className="hover:bg-white/50 rounded-full flex items-center justify-center w-[230px]">
+            <Link to={"melhores-boladas"} className="hover:bg-white/50 rounded-full flex items-center justify-center w-[230px]">
               <label className="font-extrabold text-gray-600">Melhores Boladas</label>
-            </div>
+            </Link >
+          
             <ProvinceDropdown/>
           </div>
               <PromotionalCards />

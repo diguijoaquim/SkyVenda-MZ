@@ -1,9 +1,9 @@
-import { SellerCard } from '../cards/sellercard';
+import { SellerCard } from '../../components/cards/sellercard';
 import api from '../../api/api_fecher';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import { HomeContext } from '../../context/HomeContext';
-import { SellerCardSkeleton } from '../skeleton/SellerCardSkeleton';
+import { SellerCardSkeleton } from '../../components/skeleton/SellerCardSkeleton';
 
 export function SellersGrid() {
   const {user}=useContext(AuthContext);
