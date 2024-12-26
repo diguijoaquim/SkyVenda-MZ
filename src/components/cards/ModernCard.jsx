@@ -121,14 +121,12 @@ export function ModernCard({ product }) {
               
             </div>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-xs"
+          <button
+            className="text-xs px-2 bg-indigo-500 py-2 rounded text-white"
             onClick={()=>navigate(`/post/${product.slug}`)}
           >
-            Ver Detalhes
-          </Button>
+            Comprar
+          </button>
         </div>
       </div>
       
