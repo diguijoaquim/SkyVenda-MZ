@@ -64,7 +64,7 @@ function NavigationItem({
         variant === 'destructive' && "hover:bg-red-50 text-gray-700 hover:text-red-600"
       )}
     >
-      <div className="relative flex items-center justify-center w-8 h-8">
+      <div className="relative flex items-center justify-center ">
         <Icon className={cn(
           "h-[22px] w-[22px]",
           isActive ? "text-[#0866ff]" : "text-[#050505]",
@@ -120,15 +120,15 @@ export function Sidebar() {
 
   return (
     <aside className={cn(
-      "w-[70px] hover:w-[280px] h-screen bg-[#ffffff] border-r border-[#e4e6eb]",
+      "w-[62px] hover:w-[280px] h-screen bg-[#ffffff] border-r border-[#e4e6eb]",
       "transition-all duration-300 group/sidebar overflow-hidden",
     )}>
       <div className="flex flex-col h-full">
         {isAuthenticated && user ? (
-          <div className="p-2 mb-2">
-            <div className="relative flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+          <div className="p-2 mb-2 bg-re">
+            <div className="relative flex gap-3  rounded-lg hover:bg-gray-50 transition-colors items-center">
               <div className="relative">
-                <Avatar className="h-10 w-10 ring-2 ring-white">
+                <Avatar className="h-11 w-11 ring-2 ring-white">
                   <AvatarImage 
                     src={`https://skyvendamz.up.railway.app/perfil/${user.perfil}` || "https://github.com/shadcn.png"} 
                     alt={user?.nome || "User"} 

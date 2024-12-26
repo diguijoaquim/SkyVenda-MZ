@@ -29,6 +29,8 @@ import Teste from './pages/teste';
 import Sellers from './pages/sellers';
 import MyProducts from './pages/myproducts';
 import SkyBackground from './components/bg';
+import CategoryPage from './pages/CategoryPage';
+import ProductProvince from './pages/firlterByProvince';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -94,10 +96,13 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
+                  <Route path="/:categoria/:subcategoria" element={<CategoryPage/>} />
                   <Route path="/pedidos" element={<HomeLayout><h1>Pedidos</h1></HomeLayout>} />
                   <Route path="/produtos" element={<HomeLayout><MyProducts/></HomeLayout>} />
                   <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
                   <Route path="/nhonguistas" element={<HomeLayout><Sellers/></HomeLayout>} />
+                  <Route path="/p/:province" element={<HomeLayout><ProductProvince/></HomeLayout>} />
+
                   
                   {/* Protected Routes */}
                   <Route

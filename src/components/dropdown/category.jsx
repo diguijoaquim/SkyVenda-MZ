@@ -1,22 +1,39 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Menu, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom'; // Importando Link do react-router-dom
 
 const categories = [
   {
-    name: 'Electronics',
-    subcategories: ['Smartphones', 'Laptops', 'Tablets', 'Accessories']
+    name: 'Eletrônicos',
+    subcategories: ['Smartphones', 'Laptops', 'Tablets', 'Acessórios']
   },
   {
-    name: 'Fashion',
-    subcategories: ['Men\'s Clothing', 'Women\'s Clothing', 'Shoes', 'Accessories']
+    name: 'Moda',
+    subcategories: ['Roupas Masculinas', 'Roupas Femininas', 'Sapatos', 'Acessórios']
   },
   {
-    name: 'Home & Living',
-    subcategories: ['Furniture', 'Decor', 'Kitchen', 'Lighting']
+    name: 'Casa & Decoração',
+    subcategories: ['Móveis', 'Decoração', 'Cozinha', 'Iluminação']
   },
   {
-    name: 'Beauty',
-    subcategories: ['Skincare', 'Makeup', 'Haircare', 'Fragrances']
+    name: 'Beleza',
+    subcategories: ['Cuidados com a Pele', 'Maquiagem', 'Cuidados com o Cabelo', 'Perfumes']
+  },
+  {
+    name: 'Viaturas',
+    subcategories: ['Carros', 'Motos', 'Peças & Acessórios']
+  },
+  {
+    name: 'Imóveis',
+    subcategories: ['Casas', 'Apartamentos', 'Terrenos', 'Propriedades Comerciais']
+  },
+  {
+    name: 'Eletrodomésticos',
+    subcategories: ['Geladeiras', 'Máquinas de Lavar', 'Micro-ondas', 'Ar Condicionado']
+  },
+  {
+    name: 'Roupas e Sapatos',
+    subcategories: ['Sapatos Masculinos', 'Sapatos Femininos', 'Roupas Casuais', 'Roupas Formais']
   }
 ];
 
@@ -54,12 +71,16 @@ export default function CategoriesDropdown() {
               <div className="absolute left-full top-0 hidden group-hover:block">
                 <div className="ml-2 w-48 bg-white rounded-lg shadow-lg py-2">
                   {category.subcategories.map((subcategory) => (
-                    <button
+                    <Link
                       key={subcategory}
-                      className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
+                      to={`/${category.name.toLowerCase()}/${subcategory.toLowerCase().replace(/\s+/g, '-')}`} // Link para a página da subcategoria
                     >
-                      {subcategory}
-                    </button>
+                      <button
+                        className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
+                      >
+                        {subcategory}
+                      </button>
+                    </Link>
                   ))}
                 </div>
               </div>

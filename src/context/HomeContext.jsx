@@ -14,6 +14,42 @@ const HomeProvider = ({ children }) => {
   const [firstTime, setFirstTime] = useState(true);
   const [myproducts,setMyProducts] = useState([]);
   const [sellers,setSellers] = useState([]);
+  const [provinceProducts, setProvinceProducts] = useState({});
+
+
+  // Função genérica para adicionar produtos de uma província
+  const addProvinceProducts = useCallback((province, products) => {
+    setProvinceProducts((prev) => ({
+      ...prev,
+      [province]: products, // Atualiza ou adiciona os produtos da província
+    }));
+  }, []);
+
+  // Função para carregar produtos de uma província específica
+  const loadProvinceProducts = useCallback(
+    async (province) => {
+      if (provinceProducts[province]) {
+        console.log(`Dados de ${province} já carregados.`);
+        return provinceProducts[province]; // Retorna os dados armazenados
+      }
+
+      try {
+        setIsLoading(true);
+        const response = await api.get(`/produtos/pesquisa/?termo=${province}`);
+        addProvinceProducts(province, response.data); // Armazena os dados no estado
+        console.log(`Dados de ${province} carregados com sucesso.`);
+        return response.data;
+      } catch (err) {
+        toast.error(`Erro ao carregar dados de ${province}`);
+        return [];
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [provinceProducts, user_id, setIsLoading, addProvinceProducts]
+  );
+
+  
 
   // Função para carregar os dados iniciais
   const LoadData = useCallback(async () => {
@@ -43,6 +79,7 @@ const HomeProvider = ({ children }) => {
   //funcoes que atualiza o estado usando os componentes filhos
   const addProducts=(products)=>setMyProducts(products)
   const addSellers=(sellers)=>setSellers(sellers)
+  const addCaboProducts=(produtos)=>setcaboProduct(produtos)
 
   const stopLoading = useCallback(() => {
     setTimeout(() => {
@@ -94,7 +131,10 @@ const HomeProvider = ({ children }) => {
         myproducts,
         addProducts,
         sellers,
-        addSellers
+        addSellers,
+        addProvinceProducts,
+        loadProvinceProducts,
+        provinceProducts,
       }}
     >
       {children}

@@ -8,7 +8,6 @@ import api from '../api/api_fecher';
 import ReactQuill from 'react-quill';
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
 import { useToast } from "../hooks/use-toast"
 import { ToastAction } from "../components/ui/toast"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";

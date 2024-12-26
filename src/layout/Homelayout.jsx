@@ -22,17 +22,7 @@ export default function HomeLayout({children =<Profile/>}) {
         <div className="h-[100vh]  w-[100%]" >   
         <Header/>
         <div className="h-[100vh] w-full overflow-y-auto">
-        <div className="p-4 flex gap-3">
-        <CategoriesDropdown/>
-
-        <div className="hover:bg-white/50 rounded-full flex items-center justify-center w-[230px]">
-          <label className="font-extrabold text-gray-600">Melhores Boladas</label>
-        </div>
-        <div className="hover:bg-white/50 rounded-full flex items-center justify-center w-[230px] gap-2">
-          <FiMapPin/>
-          <label className="font-extrabold text-gray-600">Da Sua Provincia</label>
-        </div>
-        </div>
+        
         {children}
         </div>
         </div>
