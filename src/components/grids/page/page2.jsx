@@ -9,6 +9,7 @@ import { useToast } from "../../../hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import { CATEGORIES, SUBCATEGORIES } from '../../../data/consts';
 import api from '../../../api/api_fecher';
+import { ArrowLeft,Pencil } from 'lucide-react';
 
 export function Page2({ selectedProduct, onBack, token }) {
   // States for each input field
@@ -95,16 +96,20 @@ export function Page2({ selectedProduct, onBack, token }) {
     <div className="bg-white rounded-lg shadow h-[calc(100vh-100px)] overflow-y-auto">
       <div className="p-4 border-b sticky top-0 bg-white z-10">
         <div className="flex items-center gap-2">
-          <button
-            className="flex justify-center items-center hover:bg-indigo-200 rounded-full p-3"
+        <button
+            className="flex justify-center items-center hover:bg-indigo-100 rounded-full p-2 transition-colors"
             onClick={onBack}
+            aria-label="Voltar"
           >
-            <FaArrowLeft />
+            <ArrowLeft className="h-5 w-5 text-indigo-600" />
           </button>
-          <h2 className="text-lg font-semibold text-gray-900">
-            Editar Produto - <span className="font-bold">{selectedProduct?.title}</span>
-          </h2>
-        </div>
+          <div className="flex items-center gap-2">
+            <Pencil className="h-6 w-6 text-indigo-600" />
+            <h2 className="text-xl font-semibold text-gray-900">
+              Editar Produto - <span className="font-bold text-indigo-600 ">{selectedProduct?.title}</span>
+            </h2>
+          </div>
+          </div>
       </div>
       {selectedProduct && (
         <div className="flex flex-col lg:flex-row gap-6 p-4">
@@ -228,11 +233,11 @@ export function Page2({ selectedProduct, onBack, token }) {
 
             <div className="bg-white p-4 border-t w-[500px] flex justify-center items-center flex-col gap-2">
                     {!saveLoading ? (
-                        <Button onClick={handleSubmit} className="w-full">
+                        <Button onClick={handleSubmit} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">
                             Salvar Alterações
                         </Button>
                     ):(
-                        <Button  className="w-full opacity-50" >
+                        <Button  className="w-full opacity-50 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold" >
                             Salvando...
                         </Button>
                     )}

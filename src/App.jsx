@@ -32,6 +32,7 @@ import SkyBackground from './components/bg';
 import CategoryPage from './pages/CategoryPage';
 import ProductProvince from './pages/firlterByProvince';
 import BestBolada from './pages/bestbolada';
+import Pedidos from './pages/pedidos';
 
 const RouteTracker = ({ setCurrentRoute }) => {
   const location = useLocation();
@@ -98,7 +99,7 @@ function App() {
                   <Route path="/search" element={<Search />} />
                   <Route path="/post/:slug" element={<HomeLayout><ProductPage /></HomeLayout>} />
                   <Route path="/:categoria/:subcategoria" element={<CategoryPage/>} />
-                  <Route path="/pedidos" element={<HomeLayout><h1>Pedidos</h1></HomeLayout>} />
+                  <Route path="/pedidos" element={<HomeLayout><Pedidos/></HomeLayout>} />
                   <Route path="/produtos" element={<HomeLayout><MyProducts/></HomeLayout>} />
                   <Route path="/estatistaicas" element={<HomeLayout><h1>estatistaicas</h1></HomeLayout>} />
                   <Route path="/nhonguistas" element={<HomeLayout><Sellers/></HomeLayout>} />

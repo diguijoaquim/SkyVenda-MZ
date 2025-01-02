@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   MapPin, Eye, Heart, Star, MessageCircle, ChevronLeft, ChevronRight, X,
-  Package, Shield, Truck, Share2, AlertCircle, Phone, Mail, ShoppingCart,Loader2
+  Package, Shield, Truck, Share2, AlertCircle, Phone, Mail, ShoppingCart, Loader2
 } from 'lucide-react';
 import { useContext } from 'react';
 import { HomeContext } from '../context/HomeContext';
@@ -9,34 +9,35 @@ import api from '../api/api_fecher';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { formatPrice } from '../utils/formatters';
-import axios from 'axios';
+import { useToast } from '../hooks/use-toast';
 
 // Gallery Component
-function ProductGallery({ images }) {
+function ProductGallery({ images, thumb }) {
   const [currentImage, setCurrentImage] = useState(0);
-  const validImages = images.filter(Boolean);
+  // Combine thumb with images array and filter out empty values
+  const allImages = [...(thumb ? [thumb] : []), ...(images?.split(',') || [])].filter(Boolean);
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % validImages.length);
+    setCurrentImage((prev) => (prev + 1) % allImages.length);
   };
 
   const previousImage = () => {
-    setCurrentImage((prev) => (prev - 1 + validImages.length) % validImages.length);
+    setCurrentImage((prev) => (prev - 1 + allImages.length) % allImages.length);
   };
 
-  if (!validImages.length) return null;
+  if (!allImages.length) return null;
 
   return (
     <div className="relative">
       <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
         <img
-          src={`https://skyvendamz.up.railway.app/produtos/${validImages[currentImage]}`}
+          src={`https://skyvendamz.up.railway.app/produto/${allImages[currentImage]}`}
           alt={`Product image ${currentImage + 1}`}
           className="h-full w-full object-cover"
         />
       </div>
       
-      {validImages.length > 1 && (
+      {allImages.length > 1 && (
         <>
           <button
             onClick={previousImage}
@@ -55,7 +56,7 @@ function ProductGallery({ images }) {
       )}
 
       <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
-        {validImages.map((image, index) => (
+        {allImages.map((image, index) => (
           <button
             key={index}
             onClick={() => setCurrentImage(index)}
@@ -64,7 +65,7 @@ function ProductGallery({ images }) {
             }`}
           >
             <img
-              src={`https://skyvendamz.up.railway.app/produtos/${image}`}
+              src={`https://skyvendamz.up.railway.app/produto/${image}`}
               alt={`Thumbnail ${index + 1}`}
               className="h-16 w-16 rounded-lg object-cover"
             />
@@ -78,7 +79,6 @@ function ProductGallery({ images }) {
 // Comments Dialog Component
 function CommentsDialog({ isOpen, onClose, product, add }) {
   const [newComment, setNewComment] = useState('');
-  const { user } = useContext(AuthContext);
 
   if (!isOpen) return null;
 
@@ -117,7 +117,7 @@ function CommentsDialog({ isOpen, onClose, product, add }) {
             <div key={comment.id} className="flex gap-3">
               <img
                 src={`https://skyvendamz.up.railway.app/perfil/${comment.user.avatar}`}
-                onError={(e) => e.target.src = 'imagem.jpg'}
+                onError={(e) => e.target.src = 'https://skyvenda-mz.vercel.app/imagem.jpg'}
                 alt={comment.user.name}
                 className="w-10 h-10 rounded-full flex-none"
               />
@@ -193,41 +193,44 @@ export default function ProductPage() {
   const [isLiked, setIsLiked] = useState(false);
   const { slug } = useParams();
   const { loading, produtos, addOrUpdateProduto } = useContext(HomeContext);
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated, token } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const [loading2, setLoading2] = useState(loading);
-  const [found, setFound] = useState(true);
-  const [loadingPedido,setLoadingpedido] = useState(false);
+  const [loadingPedido, setLoadingpedido] = useState(false);
+  const [isMyProduct,setIsMyProduct]=useState(false)
+  const {toast}=useToast()
 
   useEffect(() => {
     async function fetchProduct() {
       try {
         setLoading2(true);
+        // Check if product exists in context
         const produtoLocal = produtos.find(p => p.slug === slug);
         
         if (produtoLocal) {
+          // If product exists in context, use it and just update view count
           setProduct(produtoLocal);
           setIsLiked(produtoLocal.liked);
-          await api.get(`/produtos/detalhe/${slug}`);
+          setIsMyProduct(produtoLocal.user.id===user.id)
+          await api.get(`/produtos/detalhe/${slug}`); // Just to update view count
           setLoading2(false);
+          console.log("is may: "+isMyProduct)
           return;
+        }else{
+            // If product is not in context, fetch it
+            const response = await api.get(`/produtos/detalhe/${slug}`);
+            setIsMyProduct(response.data.user.id===user.id)
+            setProduct(response.data);
+            setIsLiked(response.data.liked);
+            addOrUpdateProduto(response.data);
+            console.log("is may: "+isMyProduct)
+            
         }
 
-        if (!product) {
-          setFound(false);
-        } else {
-          setFound(true);
-        }
-
-        const response = await api.get(`/produtos/detalhe/${slug}`);
-        if (!found) {
-          setProduct(response.data);
-          setIsLiked(response.data.liked);
-          setLoading2(false);
-          addOrUpdateProduto(response.data);
-        }
+        
       } catch (err) {
         console.log("Erro ao buscar detalhes do produto:", err.message);
+      } finally {
         setLoading2(false);
       }
     }
@@ -263,10 +266,7 @@ export default function ProductPage() {
   };
 
   const handleBuyNow = async () => {
-    if (!isAuthenticated) {
-      // Handle not authenticated
-      return;
-    }
+    if (!isAuthenticated) return;
     
     try {
       await api.post(`/produtos/${product.id}/order`, { quantity });
@@ -276,6 +276,39 @@ export default function ProductPage() {
     }
   };
 
+  function fazerPedido() {
+    if(isMyProduct){
+      console.log("o produto e seu")
+      toast({
+        title: "SkyVenda",
+        description: "Nao pode fazer pedido no seu Produto!",
+      });
+    }else{
+      setLoadingpedido(true);
+      const formdata=new FormData()
+      formdata.append('produto_id',product.id)
+      formdata.append('quantidade',1)
+      formdata.append('tipo','normal')
+
+      api.post('pedidos/pedidos/criar/',formdata, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(res => {
+        toast({
+          title: "✨ Sucesso!",
+          description: "Pedido enviado com sucesso! 🚀",
+        });
+      }).catch(err => {
+        toast({
+          title: "😢 Erro",
+          description: "Ocorreu um erro ao processar o pedido",
+        });
+      }).finally(() => setLoadingpedido(false));
+      }
+    
+  }
+
   if (loading2) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -284,18 +317,16 @@ export default function ProductPage() {
     );
   }
 
-  function fazerPedido(user,product){
-    setLoadingpedido(true)
-    axios.post('/').finally(()=>setLoadingpedido(false))
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
-            {product && product.images && (
-              <ProductGallery images={product.images.split(',')} />
+            {product && (
+              <ProductGallery 
+                images={product.images || ''} 
+                thumb={product.thumb}
+              />
             )}
             
             {/* Share Button */}
@@ -385,7 +416,7 @@ export default function ProductPage() {
               {product?.stock_quantity < 5 && (
                 <div className="flex items-center gap-2 text-amber-600 bg-amber-50 p-2 rounded-lg">
                   <AlertCircle className="w-5 h-5" />
-                  <span className="text-sm">Only {product.stock_quantity} items left!</span>
+                  <span className="text-sm">No maximo {product.stock_quantity} items para baixo!</span>
                 </div>
               )}
 
@@ -396,15 +427,19 @@ export default function ProductPage() {
                 >
                   Comprar Agora
                 </button>
-                <button onClick={fazerPedido} className="w-full py-4 border-2 border-indigo-600 text-indigo-600 rounded-lg
-                 hover:bg-indigo-50 font-semibold text-lg transition-colors flex items-center justify-center gap-2">
+                <button 
+                  onClick={fazerPedido} 
+                  className="w-full py-4 border-2 border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 font-semibold text-lg transition-colors flex items-center justify-center gap-2"
+                >
                   {loadingPedido ? (
-                    <><Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    <span>processando...</span></>
-                  ):(
                     <>
-                    <ShoppingCart className="w-5 h-5" />
-                    Fazer Pedido
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      <span>processando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="w-5 h-5" />
+                      Fazer Pedido
                     </>
                   )}
                 </button>
@@ -433,7 +468,7 @@ export default function ProductPage() {
               <div className="flex items-center gap-4">
                 <img
                   src={`https://skyvendamz.up.railway.app/perfil/${product?.user?.avatar}`}
-                  onError={(e) => e.target.src = 'imagem.jpg'}
+                  onError={(e) => e.target.src = 'https://skyvenda-mz.vercel.app/imagem.jpg'}
                   alt={product?.user?.name}
                   className="w-16 h-16 rounded-full object-cover"
                 />

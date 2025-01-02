@@ -2,7 +2,7 @@ import React from 'react'
 import { ProductCardSkeleton2 } from '../../skeleton/productcardskeleton2'
 import { ProductCard } from '../../cards/ProductCard'
 
-export default function Page1({loading,myproducts,handleEdit}) {
+export default function Page1({loading,myproducts,handleEdit,handleTurbo}) {
   return (
     <div className="bg-white rounded-lg shadow h-[calc(100vh-100px)]">
           <div className="p-4 border-b">
@@ -25,6 +25,7 @@ export default function Page1({loading,myproducts,handleEdit}) {
                       key={product.id}
                       product={product}
                       onEdit={handleEdit}
+                      onTurbo={handleTurbo}
                       onDelete={() => handleDelete(product.slug,product.title)}
                     />
                   ))

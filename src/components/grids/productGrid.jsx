@@ -6,6 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useToast } from "../../hooks/use-toast";
 import Page1 from './page/page1';
 import { Page2 } from './page/page2';
+import Page3 from './page/Page3';
 
 export function ProductGrid() {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,11 @@ export function ProductGrid() {
     setSelectedProduct(product);
     setPage(2);
   };
+  const handleTurbo=(product)=>{
+    setSelectedProduct(product);
+    setPage(3);
+    
+  }
 
 
 
@@ -73,13 +79,22 @@ export function ProductGrid() {
   return (
     <>
       {page === 1 ? (
-        <Page1 loading={loading} myproducts={myproducts} handleEdit={handleEdit}/>
-      ) : (
+        <Page1 loading={loading} myproducts={myproducts} handleEdit={handleEdit} handleTurbo={handleTurbo}/>
+      ) : page==2 ?(
         <Page2
           selectedProduct={selectedProduct}
           onBack={() => setPage(1)}
           token={token}
   />
+      ):(
+        <>
+          {selectedProduct && (
+            <Page3 
+            selectedProduct={selectedProduct}
+            onBack={() => setPage(1)}
+            token={token}/>
+          )}
+        </>
       )}
     </>
   );

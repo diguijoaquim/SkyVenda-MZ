@@ -18,7 +18,7 @@ function formatNumber(num) {
   }
   return num.toString();
 }
-export function ProductCard({ product, onEdit, onDelete }) {
+export function ProductCard({ product, onEdit, onDelete,onTurbo }) {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -99,7 +99,7 @@ export function ProductCard({ product, onEdit, onDelete }) {
                   <Pencil className="w-4 h-4" />
                   Editar
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onEdit(product)} className="gap-2">
+                <DropdownMenuItem onClick={() => onTurbo(product)} className="gap-2">
                   <Earth className="w-4 h-4" />
                   Turbinar a Boldada
                 </DropdownMenuItem>
