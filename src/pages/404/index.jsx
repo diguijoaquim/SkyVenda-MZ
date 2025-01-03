@@ -4,7 +4,7 @@ export default function PageNotFound() {
     const navigate=useNavigate()
     return (
       <div className="flex flex-col h-[100vh] w-full items-center justify-center text-gray-800">
-        <p class="glitch">
+        <p className="glitch">
             <span aria-hidden="true">404</span>
             404
             <span aria-hidden="true">404</span>

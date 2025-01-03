@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import api from '../../../api/api_fecher';
+import { useToast } from '../../../hooks/use-toast';
 import {
   Select,
   SelectContent,
@@ -51,6 +52,7 @@ export default function Page3({ selectedProduct, onBack, token }) {
   const [dias, setDias] = useState(1);
   const [tipo, setTipo] = useState('ofertas_diarias'); // Default to ofertas_diarias
   const [submitLoading, setSubmitLoading] = useState(false);
+  const toast=useToast()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -73,7 +75,9 @@ export default function Page3({ selectedProduct, onBack, token }) {
       }
     })
     .then((res) => {
-      console.log(res);
+      toast({
+        title:"Produto Promovido com sucesso"
+      })
     })
     .catch((err) => {
       console.log("erro ao turbinar", err);

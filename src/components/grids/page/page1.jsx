@@ -4,11 +4,11 @@ import { ProductCard } from '../../cards/ProductCard'
 
 export default function Page1({loading,myproducts,handleEdit,handleTurbo}) {
   return (
-    <div className="bg-white rounded-lg shadow h-[calc(100vh-100px)]">
+    <div className="bg-white rounded-lg shadow ">
           <div className="p-4 border-b">
             <h2 className="text-lg font-semibold text-gray-900">Meus Produtos</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4  h-[calc(100vh-150px)] overflow-y-auto ">
             {loading ? (
               <>
                 {[...Array(4)].map((_, index) => (
